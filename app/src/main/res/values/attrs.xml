@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="circleProgressBar">
+        <attr name="circleWidth" format="dimension" />
+        <attr name="betaAngle" format="integer" />
+        <attr name="firstColor" format="color" />
+        <attr name="secondColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TabWidget">
+        <attr name="bottom_labels" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MyRadioButton">
+
+        <attr name="myDrawableSize" format="dimension"/>
+        <attr name="drawableTop" format="reference"/>
+        <attr name="drawableLeft" format="reference"/>
+        <attr name="drawableRight" format="reference"/>
+        <attr name="drawableBottom" format="reference"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="MyCheckedTextView">
+
+        <attr name="myCheckedTextViewDrawableSize" format="dimension"/>
+        <attr name="myCheckeddrawableTop" format="reference"/>
+        <attr name="myCheckeddrawableLeft" format="reference"/>
+        <attr name="myCheckeddrawableRight" format="reference"/>
+        <attr name="myCheckeddrawableBottom" format="reference"/>
+
+    </declare-styleable>
+
+
+
+    <!--录制视频控件-->
+    <declare-styleable name="MovieRecorderView">
+
+    <!-- 开始是否打开摄像头 -->
+    <attr name="is_open_camera" format="boolean"/>
+
+    <!-- 一次拍摄最长时间 -->
+    <attr name="record_max_time" format="integer"/>
+
+    <!-- 视频分辨率宽度 -->
+    <attr name="record_width" format="integer"/>
+
+    <!-- 视频分辨率高度 -->
+    <attr name="record_height" format="integer"/>
+
+</declare-styleable>
+
+    <!-- FlickeringTextView -->
+    <declare-styleable name="FlickeringTextView">
+
+    <attr name="flickeringColor" format="color"/>
+
+</declare-styleable>
+
+    <!-- RingProgressBar -->
+
+
+
+    <declare-styleable name="RingProgressBar">
+
+    <attr name="startColor" format="color"/>
+
+    <attr name="centerColor" format="color"/>
+
+    <attr name="endColor" format="color"/>
+
+    <attr name="max" format="float"/>
+
+    <attr name="progress" format="float"/>
+
+</declare-styleable>
+
+
+    <declare-styleable name="BingoSearchView">
+        <attr name="edit_hint_text" format="string"/>
+        <attr name="max_search_items" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="BingoDropListView">
+        <attr name="spinner_hint" format="string"/>
+    </declare-styleable>
+    
+</resources>

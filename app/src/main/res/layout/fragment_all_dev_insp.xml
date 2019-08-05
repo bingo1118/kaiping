@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e6e6e6"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_rela"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        android:background="@color/inspection_back">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消防管理"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/select_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/select_task"/>
+
+    </RelativeLayout>
+
+    <!-- 数量显示 -->
+    <include android:id="@+id/search_include" layout="@layout/include_search"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e6e6e6"
+        android:layout_below="@id/title_rela">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipere_fresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                ></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <include layout="@layout/progress_bar"/>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_line"
+        android:background="@color/white"
+        android:layout_below="@id/title_rela"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text="区域:"/>
+
+        <com.smart.cloud.fire.view.BingoDropDowmListView
+            android:id="@+id/devtype_drop"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/area"
+            android:layout_margin="5dp"
+            android:layout_height="35dp"></com.smart.cloud.fire.view.BingoDropDowmListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_color_gray"
+            android:layout_below="@+id/area"/>
+
+        <TextView
+            android:id="@+id/task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text="类型:"
+            android:layout_below="@id/devtype_drop"/>
+
+        <com.smart.cloud.fire.view.MyRadioGroup
+            android:id="@+id/dev_type_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/devtype_drop"
+            android:layout_toRightOf="@id/task_type">
+            <RadioButton
+                android:id="@+id/dev_type0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="烟感设备"
+                android:textSize="16sp"
+                />
+            <RadioButton
+                android:id="@+id/dev_type1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="水感设备"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/dev_type0"/>
+            <RadioButton
+                android:id="@+id/dev_type2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="燃气设备"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/dev_type1"/>
+            <RadioButton
+                android:id="@+id/dev_type3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电气设备"
+                android:textSize="16sp"
+                android:layout_below="@id/dev_type0"/>
+
+        </com.smart.cloud.fire.view.MyRadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_color_gray"
+            android:layout_below="@+id/dev_type_rg"/>
+
+        <TextView
+            android:id="@+id/task_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:text="状态:"
+            android:layout_below="@+id/dev_type_rg"/>
+
+
+        <com.smart.cloud.fire.view.MyRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:id="@+id/dev_state_rg"
+            android:layout_toRightOf="@id/task_state"
+            android:layout_below="@+id/dev_type_rg">
+
+            <RadioButton
+                android:id="@+id/dev_state0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="离线"
+                android:textSize="16sp"/>
+            <RadioButton
+                android:id="@+id/dev_state1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在线"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/dev_state0"/>
+            <RadioButton
+                android:id="@+id/dev_state2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="低电压"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/dev_state1"/>
+            <RadioButton
+                android:id="@+id/dev_state3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报警"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/dev_state1"/>
+        </com.smart.cloud.fire.view.MyRadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/text_color_gray"
+            android:layout_below="@id/dev_state_rg"/>
+
+        <TextView
+            android:id="@+id/commit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textSize="12sp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/task_select_btn_shape"
+            android:layout_below="@id/dev_state_rg"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

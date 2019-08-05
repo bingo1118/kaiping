@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.smart.cloud.fire.activity.Inspection.InspectionMap.InspectionMapActivity">
+
+    <RelativeLayout
+        android:id="@+id/title_rela"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        android:background="@color/inspection_back">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检地图"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:textSize="18sp" />
+
+        <com.smart.cloud.fire.view.BingoDropDowmListView
+            android:id="@+id/area_dropdowmlistview"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"></com.smart.cloud.fire.view.BingoDropDowmListView>
+
+    </RelativeLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_below="@id/title_rela"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.baidu.mapapi.map.MapView>
+    <include layout="@layout/progress_bar"/>
+
+</RelativeLayout>

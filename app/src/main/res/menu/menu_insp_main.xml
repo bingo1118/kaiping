@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/insp_main"
+        android:title="巡检"
+        android:icon="@drawable/insp_frag_main"/>
+
+    <item
+        android:id="@+id/insp_map"
+        android:title="地图"
+        android:icon="@drawable/insp_frag_map"/>
+
+    <item
+        android:id="@+id/insp_camera"
+        android:title="监控"
+        android:icon="@drawable/insp_frag_camera"/>
+
+    <item
+        android:id="@+id/insp_fire"
+        android:title="消防"
+        android:icon="@drawable/insp_frag_fire"/>
+
+    <item
+        android:id="@+id/insp_notice"
+        android:title="配置"
+        android:icon="@drawable/insp_setting"/>
+
+</menu>
