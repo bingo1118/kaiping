@@ -1,5 +1,10 @@
 package com.smart.cloud.fire.global;
 
+import com.smart.cloud.fire.view.TakePhoto.Photo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
 
     String qdetail;
@@ -8,6 +13,26 @@ public class Question {
     String questionType;
     boolean isFirstItem;
     String qjudge;//合格答案
+    String remark;
+    List<Photo> photos=new ArrayList<>();
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+
 
     public String getQjudge() {
         return qjudge;

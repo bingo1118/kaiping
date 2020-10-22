@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="上传处理信息"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:background="@color/inspection_back"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="15dp">
+
+
+            <TextView
+                android:id="@+id/memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="处理结果:"/>
+            <EditText
+                android:id="@+id/memo_edit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="14sp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                android:hint="处理结果"
+                android:textColor="@color/text_view_and_kuang"
+                android:textColorHint="@color/hint_color_text"
+                android:imeOptions="actionNext"
+                android:background="@drawable/edit_view_bg" />
+    </LinearLayout>
+
+</LinearLayout>

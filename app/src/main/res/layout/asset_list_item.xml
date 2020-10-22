@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/nfc_devinfo_shape"
+        android:id="@+id/rela">
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="资产名"/>
+
+        <TextView
+            android:id="@+id/mac_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mac"
+            android:layout_below="@id/name_tv"/>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/mac_tv"
+            android:layout_marginTop="5dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/state_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line"
+            android:layout_alignParentRight="true"
+            android:textSize="12sp"
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/wifi_acclerate_orange"
+            android:text="已盘点"/>
+
+
+        <TextView
+            android:id="@+id/area_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line"
+            android:layout_margin="5dp"
+            android:text="盘点区域:"
+            android:textColor="@color/dialog_back_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/area_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="资产类别:"/>
+
+        <TextView
+            android:id="@+id/create_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/type_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="入库时间:"/>
+
+        <TextView
+            android:id="@+id/overtime_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/create_time_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="过期时间:"/>
+
+        <TextView
+            android:id="@+id/state2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/create_time_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="状态:"/>
+
+        <TextView
+            android:id="@+id/memo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/overtime_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="详情描述:"/>
+
+        <TextView
+            android:id="@+id/checkuser_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/memo_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="盘点人:"/>
+
+        <TextView
+            android:id="@+id/checktime_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:layout_below="@id/checkuser_tv"
+            android:textColor="@color/dialog_back_color"
+            android:text="详情描述:"/>
+
+        <TextView
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/checktime_tv"
+            android:layout_marginTop="5dp"
+            android:background="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line2"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/commit_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/color_local_device_bar"
+                android:text="盘点"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@color/text_color_gray"/>
+
+            <TextView
+                android:id="@+id/update_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/color_local_device_bar"
+                android:text="更新"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@color/text_color_gray"/>
+
+            <TextView
+                android:id="@+id/upload_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/color_local_device_bar"
+                android:text="上报"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -55,6 +55,9 @@ public class PushAlarmMsg implements Serializable{
     private String uploadpeople;
     private String alarmTypeName;
 
+    private String akey;//绑定资产ID
+    private String assetName;//绑定资产名称
+
     public String getAddress() {
         return address;
     }
@@ -213,6 +216,22 @@ public class PushAlarmMsg implements Serializable{
 
     public void setAlarmTypeName(String alarmTypeName) {
         this.alarmTypeName = alarmTypeName;
+    }
+
+    public String getAkey() {
+        return akey;
+    }
+
+    public void setAkey(String akey) {
+        this.akey = akey;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
     public static class CameraBean implements Serializable{

@@ -107,6 +107,23 @@
         android:text="火灾报警"
         android:textColor="@color/hj_color_text"
         android:textSize="16sp" />
+    <LinearLayout
+        android:id="@+id/asset_info_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/asset_id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asset ID"/>
+        <TextView
+            android:id="@+id/asset_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asset Name"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/alarm_mac"
         android:layout_width="wrap_content"

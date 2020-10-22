@@ -78,7 +78,7 @@
         <!-- android:value="F0GrSzPf0G6As4uGGRGbSFsIYLqOFmKT" /> -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="kwFFAPEzv1Mmk6KFR4S4Ae9MS5UAOyOq" />
+            android:value="86mil8YftwixcYxtQ7HD26pi2qrHOZKH" />
 
         <!--
         测试模式key
@@ -336,7 +336,35 @@
             android:theme="@style/TaskDialogStyle" />
         <activity android:name="com.smart.cloud.fire.mvp.Inspction.InspMainActivity" />
         <activity android:name="com.smart.cloud.fire.activity.Inspection.InspHistory.InspHistoryActivity" />
-        <activity android:name="com.smart.cloud.fire.activity.Inspection.UploadMsg.UploadMsgActivity"></activity>
+        <activity android:name="com.smart.cloud.fire.activity.Inspection.UploadMsg.UploadMsgActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetManagerActivity" />
+        <activity android:name="com.smart.cloud.fire.order.OrderList.OrderListActivity" />
+        <activity android:name="com.smart.cloud.fire.order.OrderInfoDetail.OrderInfoActivity" />
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.DealOrderActivity" />
+        <activity
+            android:name="com.smart.cloud.fire.order.OrderNotice.OrderNoticeActivity"
+            android:theme="@style/TaskDialogStyle" />
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.ChangeDealerActivity" />
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.CheakOrderActivity" />
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.UploadOrderActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetByCkey.AssetByCkeyActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.DealAssetActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.UpdateAssetDataActivity" />
+        <activity
+            android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.AssetOvertimeNoticeActivity"
+            android:theme="@style/TaskDialogStyle" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.UploadAssetProblemActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetByCkey.AssetListActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.AddAssetActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.SearchAssetActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetHomeActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.TagAlarm.TagAlarmListActivity" />
+        <activity
+            android:name="com.smart.cloud.fire.activity.AssetManage.TagAlarm.TagAlarmPushActivity"
+            android:launchMode="singleTop" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.AssetInfoActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.Tag.TagListActivity" />
+        <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetByCkey.BindTagActivity"></activity>
     </application>
 
 </manifest>

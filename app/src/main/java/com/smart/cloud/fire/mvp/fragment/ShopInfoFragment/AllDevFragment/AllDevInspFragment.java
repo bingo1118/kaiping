@@ -29,6 +29,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.smart.cloud.fire.activity.AlarmHistory.AlarmHistoryActivity;
 import com.smart.cloud.fire.activity.AllSmoke.AllSmokeActivity;
 import com.smart.cloud.fire.activity.AllSmoke.AllSmokePresenter;
 import com.smart.cloud.fire.activity.AllSmoke.AllSmokeView;
@@ -242,18 +243,22 @@ public class AllDevInspFragment extends MvpFragment<AllSmokePresenter> implement
         this.onClick1(v);
     }
 
-    @OnClick({R.id.select_btn})
+    @OnClick({R.id.select_btn,R.id.alarm_history_tv})
     public void onClick1(View view){
         switch (view.getId()){
+            case R.id.alarm_history_tv:
+                Intent i=new Intent(mContext, AlarmHistoryActivity.class);
+                mContext.startActivity(i);
+                break;
             case R.id.commit_tv:
                 if(dev_type0.isChecked()){
-                    type="0";
+                    type="3";
                 }else if(dev_type1.isChecked()){
                     type="1";
                 }else if(dev_type2.isChecked()){
-                    type="2";
+                    type="4";
                 }else if(dev_type3.isChecked()){
-                    type="3";
+                    type="2";
                 }
                 if(dev_state0.isChecked()){
                     state="0";
@@ -314,6 +319,9 @@ public class AllDevInspFragment extends MvpFragment<AllSmokePresenter> implement
             page="1";
         }//@@9.5
         loadMoreCount = smokeList.size();
+        if(loadMoreCount==0){
+            T.showShort(mContext,"无数据");
+        }
         list.clear();
         list.addAll((List<Smoke>)smokeList);
         shopSmokeAdapter = new ShopSmokeAdapter(mContext, list);

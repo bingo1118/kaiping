@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="5dp"
+    android:background="@drawable/nfc_devinfo_shape"
+    android:id="@+id/rela">
+
+    <TextView
+        android:id="@+id/name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="盘点任务名"/>
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2020-08-31 15:15:15"
+        android:layout_below="@id/name_tv"/>
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/time_tv"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:id="@+id/state_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/line"
+        android:layout_alignParentRight="true"
+        android:textSize="12sp"
+        android:padding="5dp"
+        android:layout_margin="3dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/wifi_acclerate_orange"
+        android:text="已完成"/>
+
+
+    <TextView
+        android:id="@+id/area_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line"
+        android:layout_margin="5dp"
+        android:text="盘点区域:"
+        android:textColor="@color/dialog_back_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/area_tv"
+        android:textColor="@color/dialog_back_color"
+        android:visibility="gone"
+        android:text="资产类别:"/>
+
+    <TextView
+        android:id="@+id/conpleted_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/type_tv"
+        android:textColor="@color/dialog_back_color"
+        android:text="已完成:"/>
+
+    <TextView
+        android:id="@+id/no_conplete_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_below="@id/type_tv"
+        android:layout_toRightOf="@id/conpleted_tv"
+        android:textColor="@color/dialog_back_color"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:text="未完成:"/>
+
+    <TextView
+        android:id="@+id/memo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/conpleted_tv"
+        android:textColor="@color/dialog_back_color"
+        android:text="备注:"/>
+
+</RelativeLayout>

@@ -195,9 +195,9 @@ public class TaskListFragment extends MvpFragment<TaskListPresenter> implements 
                 if(viewHolder.task_state0.isChecked()){
                     state="0";
                 }else if(viewHolder.task_state1.isChecked()){
-                    state="1";
-                }else if(viewHolder.task_state2.isChecked()){
                     state="2";
+                }else if(viewHolder.task_state2.isChecked()){
+                    state="3";
                 }
                 if(!((startTime=viewHolder.starttime_tv.getText().toString()).length()>5)){
                     startTime="";
@@ -276,7 +276,7 @@ public class TaskListFragment extends MvpFragment<TaskListPresenter> implements 
 
     @Override
     public void getSumDataSuccess(int todoNum, int progreaNum, int complishNum) {
-        sum.setText("总数:"+todoNum);
+        sum.setText("未开始:"+todoNum);
         pro.setText("进行中:"+progreaNum);
         complish.setText("已完成"+complishNum);
     }

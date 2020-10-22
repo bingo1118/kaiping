@@ -23,7 +23,6 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     signingConfigs {
         config {
             keyAlias 'demo'
@@ -36,18 +35,18 @@ android {
     }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "fire.cloud.smart.com.smartcloudfire"
+        applicationId "fire.cloud.smart.com.smartcloudfire_inspction"
         minSdkVersion 16
         targetSdkVersion 19
-        versionCode 44
-        versionName "4.3.37"
+        versionCode 46
+        versionName "4.3.39"
         multiDexEnabled true
 
         manifestPlaceholders = [
                 //正式
-                GETUI_APP_ID    : "WUieDSVpdYAFJRxVSTpVA3",
-                GETUI_APP_KEY   : "81wzEpKaYp7vEzcFgDEWp2",
-                GETUI_APP_SECRET: "qGM9DuOZnW51PL6hai9xB5",
+                GETUI_APP_ID    : "3a4L6Rg5jx88y05OzKXY53",
+                GETUI_APP_KEY   : "iRbuU4Ba4PAao39pNOs8R1",
+                GETUI_APP_SECRET: "YuruksBdpf5LjnrRtWFRI8",
 
                 //测试
 //                GETUI_APP_ID    : "pJoinMzN1q5FzNbbYJ25f3",
@@ -59,6 +58,10 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
+
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
@@ -117,7 +120,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.blankj:utilcode:1.20.3'
     implementation project(':p2PCore')
-    implementation 'com.getui:sdk:2.13.1.0'
+    implementation 'com.getui:sdk:2.13.2.0'
     implementation 'io.reactivex:rxjava:1.1.0'
     implementation 'io.reactivex:rxandroid:1.1.0'
     implementation 'com.jakewharton.rxbinding:rxbinding:1.0.0'

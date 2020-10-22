@@ -34,7 +34,7 @@
             android:id="@+id/about_title"
             android:layout_height="100dp"
             android:layout_width="100dp"
-            android:src="@drawable/yxf"
+            android:src="@mipmap/ic_launcher"
             android:layout_centerHorizontal="true"
             />
         <RelativeLayout

@@ -175,6 +175,7 @@ public class MyZoomActivity extends Activity {
             }
         }
     };
+
     Handler handler = new Handler() {
         long last_time;
 

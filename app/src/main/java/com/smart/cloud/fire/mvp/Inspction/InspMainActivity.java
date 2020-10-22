@@ -21,6 +21,7 @@ import com.igexin.sdk.PushManager;
 import com.smart.cloud.fire.activity.Inspection.InspectionMain.InspMainFragment;
 import com.smart.cloud.fire.activity.Inspection.InspectionMain.InspSettingFragment;
 import com.smart.cloud.fire.activity.Inspection.InspectionMap.InspMapFragment;
+import com.smart.cloud.fire.activity.Inspection.ItemsList.ItemsListFragment;
 import com.smart.cloud.fire.activity.Inspection.NoticeListActivity.NoticeFragment;
 import com.smart.cloud.fire.activity.Inspection.TaskList.TaskListFragment;
 import com.smart.cloud.fire.base.ui.MvpActivity;
@@ -28,6 +29,7 @@ import com.smart.cloud.fire.global.ConstantValues;
 import com.smart.cloud.fire.global.SafeScore;
 import com.smart.cloud.fire.global.SmokeSummary;
 import com.smart.cloud.fire.mvp.fragment.ShopInfoFragment.AllDevFragment.AllDevInspFragment;
+import com.smart.cloud.fire.mvp.fragment.ShopInfoFragment.AssetManager.AssetHomeFragment;
 import com.smart.cloud.fire.mvp.fragment.ShopInfoFragment.CameraFragment.CameraV4Fragment;
 import com.smart.cloud.fire.mvp.login.SplashActivity;
 import com.smart.cloud.fire.mvp.main.MainInspFragment;
@@ -50,9 +52,11 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
     @Bind(R.id.navigation)
     BottomNavigationView navigation;
 
-    TaskListFragment f1;
+//    TaskListFragment f1;
+    ItemsListFragment f1;
     InspMapFragment f2;
     CameraV4Fragment f3;
+//    AssetHomeFragment f3;
     AllDevInspFragment f4;
     InspSettingFragment f5;
 
@@ -98,7 +102,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
             switch (item.getItemId()) {
                 case R.id.insp_main:
                     if(f1==null){
-                        f1 = new TaskListFragment();
+                        f1 = new ItemsListFragment();
                         transaction.add(R.id.framePage,f1);
                     }else{
                         transaction.show(f1);

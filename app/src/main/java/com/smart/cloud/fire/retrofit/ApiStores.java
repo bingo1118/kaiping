@@ -1,5 +1,10 @@
 package com.smart.cloud.fire.retrofit;
 
+import com.smart.cloud.fire.activity.AssetManage.Tag.TagListEntity;
+import com.smart.cloud.fire.global.AllAssetListEntity;
+import com.smart.cloud.fire.global.AssetListEntity;
+import com.smart.cloud.fire.global.AssetManager;
+import com.smart.cloud.fire.global.CheckListEntity;
 import com.smart.cloud.fire.global.ChuangAnValue;
 import com.smart.cloud.fire.global.Electric;
 import com.smart.cloud.fire.global.ElectricInfo;
@@ -7,12 +12,15 @@ import com.smart.cloud.fire.global.ElectricValue;
 import com.smart.cloud.fire.global.ProofGasHistoryEntity;
 import com.smart.cloud.fire.global.SafeScore;
 import com.smart.cloud.fire.global.SmokeSummary;
+import com.smart.cloud.fire.global.TagAlarmListEntity;
 import com.smart.cloud.fire.global.TemperatureTime;
 import com.smart.cloud.fire.mvp.fragment.ConfireFireFragment.ConfireFireModel;
 import com.smart.cloud.fire.mvp.fragment.MapFragment.HttpAreaResult;
 import com.smart.cloud.fire.mvp.fragment.MapFragment.HttpError;
 import com.smart.cloud.fire.mvp.login.model.LoginModel;
 import com.smart.cloud.fire.mvp.register.model.RegisterModel;
+import com.smart.cloud.fire.order.OrderInfoDetail.HttpOrderInfoEntity;
+import com.smart.cloud.fire.order.OrderList.HttpOrderListEntity;
 
 import java.util.List;
 
@@ -188,6 +196,11 @@ public interface ApiStores {
     Observable<HttpError> getAllItems(@Query("userId") String userid,@Query("pid") String pid);
 
     //获取用户名下的巡检项目
+    @GET("getItemsList")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<HttpError> getItemsList(@Query("userId") String userid,@Query("status") String status,@Query("taskType") String taskType);
+
+    //获取用户名下的巡检项目
     @GET("getItemInfoByAreaId")
     @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
     Observable<HttpError> getItemInfoByAreaId(@Query("userId") String userid,@Query("areaId") String areaId);
@@ -216,12 +229,63 @@ public interface ApiStores {
                                      @Query("areaId") String areaId,@Query("page") String page,
                                      @Query("placeTypeId") String placeTypeId,@Query("devType") String devType);
 
+    //根据条件查询资产盘点列表数据
+    @GET("getACheckList")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<CheckListEntity> getACheckList(@Query("userId") String userId,
+                                              @Query("privilege") String privilege, @Query("stateName") String page);
+
+    //根据条件查询资产盘点清单
+    @GET("getAssetByCkey")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<AssetListEntity> getAssetByCkey(@Query("ckey") String ckey,
+                                               @Query("atPid") String atPid, @Query("ifFinish") String ifFinish,
+                                               @Query("startTime") String startTime, @Query("endTime") String endTime);
+
+    //根据条件查询标签清单
+    @GET("getTagList")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<TagListEntity> getTagList(@Query("userId") String userId,
+                                         @Query("privilege") String privilege, @Query("areaId") String areaId,
+                                         @Query("mac") String mac, @Query("name") String name,
+                                         @Query("netstate") String netstate, @Query("page") String page);
+
+    //根据条件查询所有资产列表
+    @GET("getAssetList")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<AllAssetListEntity> getAssetList(@Query("userId") String userId,
+                                                @Query("privilege") String privilege,
+                                                @Query("page") String page,
+                                                @Query("akey") String akey,
+                                                @Query("areaId") String areaId,
+                                                @Query("atId") String atId,
+                                                @Query("named") String named,
+                                                @Query("state") String state);
+
+    //根据底座报警列表
+    @GET("getTabAlarmList")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<TagAlarmListEntity> getTabAlarmList(@Query("userId") String userId,
+                                                   @Query("privilege") String privilege,
+                                                   @Query("page") String page,
+                                                   @Query("ifDeal") String ifDeal);
+
     //根据条件查询用户设备（巡检）
     @GET("getNeedDev")
     @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
     Observable<HttpError> getNeedDev2(@Query("userId") String userId, @Query("privilege") String privilege,
                                      @Query("areaId") String areaId,@Query("page") String page,
                                      @Query("state") String placeTypeId,@Query("devType") String devType);
+
+    //查询用户工单列表
+    @GET("getAllOrder")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<HttpOrderListEntity> getAllOrder(@Query("userId") String userId, @Query("privilege") String privilege);
+
+    //查询用户工单详情
+    @GET("getOrderDetail")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<HttpOrderInfoEntity> getOrderDetail(@Query("jkey") String jkey);
 
     //根据条件查询用户设备@@9.1 添加区域分级查询
     @GET("getNeedDev")

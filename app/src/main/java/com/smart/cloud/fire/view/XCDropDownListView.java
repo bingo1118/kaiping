@@ -65,7 +65,6 @@ public class XCDropDownListView extends LinearLayout {
         imageView = (ImageView)findViewById(R.id.btn);
         clear_choice = (RelativeLayout) findViewById(R.id.clear_choice);
         this.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub

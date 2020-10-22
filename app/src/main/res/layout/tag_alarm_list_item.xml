@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="8dp"
+        android:background="@drawable/nfc_devinfo_shape"
+        android:id="@+id/rela">
+
+        <TextView
+            android:id="@+id/asset_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="资产名"/>
+
+
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/asset_name_tv"
+            android:layout_marginTop="5dp"
+            android:background="@color/black"/>
+
+        <ImageView
+            android:id="@+id/alarmstate_im"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_above="@id/line"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/asset_alarm_list_triangle"/>
+
+        <TextView
+            android:id="@+id/more_tv"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/line"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:textColor="@color/text_color_blue"
+            android:text="展开"/>
+
+
+
+        <TextView
+            android:id="@+id/mac_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="mac"
+            android:layout_below="@id/line"/>
+
+
+        <TextView
+            android:id="@+id/alarmtype_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="报警类型"
+            android:textStyle="bold"
+            android:textColor="@color/hj_color_text"
+            android:layout_below="@id/mac_tv"/>
+
+        <LinearLayout
+            android:id="@+id/moreinfo_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alarmtype_name_tv"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tag_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="标签名:"
+                android:textColor="@color/dialog_back_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="地址:"/>
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="告警时间:"/>
+
+
+            <TextView
+                android:id="@+id/checkuser_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="负责人:"/>
+
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="电话:"/>
+
+            <TextView
+                android:id="@+id/dealuser_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="处理人:"/>
+
+            <TextView
+                android:id="@+id/dealtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="处理时间:"/>
+
+            <TextView
+                android:id="@+id/dealmemo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/dialog_back_color"
+                android:text="处理情况:"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

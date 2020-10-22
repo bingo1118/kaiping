@@ -19,6 +19,7 @@ import com.p2p.core.update.UpdateManager;
 import com.smart.cloud.fire.activity.Functions.constant.Constant;
 import com.smart.cloud.fire.service.LocationService;
 import com.smart.cloud.fire.ui.ForwardDownActivity;
+import com.smart.cloud.fire.utils.AutoScreenUtils;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 import com.squareup.leakcanary.LeakCanary;
@@ -60,6 +61,7 @@ public class MyApp extends Application {
         LitePal.initialize(this);//数据库框架
         SQLiteDatabase db = LitePal.getDatabase();
         HikVideoPlayerFactory.initLib(null, true);
+        AutoScreenUtils.AdjustDensity(this);
     }
 
     @Override

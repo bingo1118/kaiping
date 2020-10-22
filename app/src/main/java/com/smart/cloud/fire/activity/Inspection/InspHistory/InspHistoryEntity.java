@@ -6,6 +6,17 @@ public class InspHistoryEntity {
     String checktime;
     String workerId;
     String workerName;
+    String imgs;
+
+    public String getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
+    }
+
+
 
     public String getTuid() {
         return tuid;

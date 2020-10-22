@@ -264,6 +264,20 @@ public class RefreshRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         ((ItemViewHolder) holder).alarmMarkImage.setText(R.string.xx_gz);
                     }
                     break;
+                case 131:
+                    ((ItemViewHolder) holder).smokeMac.setText("LoRa标签:");
+                    if (alarmType == 503) {
+                        ((ItemViewHolder) holder).alarmMarkImage.setText("移动");
+                    } else if(alarmType == 504){
+                        ((ItemViewHolder) holder).alarmMarkImage.setText("倾斜");
+                    }else if(alarmType == 505){
+                        ((ItemViewHolder) holder).alarmMarkImage.setText("跌落");
+                    }else if(alarmType == 193){
+                        ((ItemViewHolder) holder).alarmMarkImage.setText(R.string.xx_ddy);
+                    } else if(alarmType == 506){
+                        ((ItemViewHolder) holder).alarmMarkImage.setText("离区");
+                    }
+                    break;
                 case 124:
                 case 101://南京防爆水位
                 case 98://南京普通水位

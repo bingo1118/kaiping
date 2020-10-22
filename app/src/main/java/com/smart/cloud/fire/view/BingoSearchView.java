@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smart.cloud.fire.utils.ListDataSave;
+import com.smart.cloud.fire.utils.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,14 +184,22 @@ public class BingoSearchView extends FrameLayout{
                 }
                 new ListDataSave(context,"bingo").setDataList("list",temp);
                 String text=edit.getText().toString();
+                if(text.length()==0){
+                    T.showShort(context,"输入不能为空");
+                    return;
+                }
                 if(listener!=null){
                     listener.onGetText(text);
                 }
-                popWnd.dismiss();
+                if(popWnd!=null){
+                    popWnd.dismiss();
+                }
                 break;
             case R.id.img_cancel:
                 edit.setText("");
-                popWnd.dismiss();
+                if(popWnd!=null){
+                    popWnd.dismiss();
+                }
                 break;
         }
     }

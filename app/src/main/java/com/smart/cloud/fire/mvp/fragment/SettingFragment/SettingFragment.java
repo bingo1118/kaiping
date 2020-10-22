@@ -155,11 +155,7 @@ public class SettingFragment extends MvpFragment<SettingFragmentPresenter> imple
                 getActivity().startActivity(intent11);
                 break;
             case R.id.app_update:
-                if(ConstantValues.SERVER_IP_NEW.contains("http://119.29.155.148")){
-                    mvpPresenter.checkUpdate(mContext);
-                }else{
-                    T.showShort(mContext,"该版本不支持版本更新");
-                }
+                mvpPresenter.checkUpdate(mContext);
 //                getActivity().finish();//@@7.13
                 break;
 //            case R.id.setting_pay:
@@ -181,7 +177,7 @@ public class SettingFragment extends MvpFragment<SettingFragmentPresenter> imple
             case R.id.setting_help_exit:
                 Intent in = new Intent();
                 in.setAction("APP_EXIT");
-                in.setPackage("fire.cloud.smart.com.smartcloudfire");//@@7.13只传当前应用
+                in.setPackage("fire.cloud.smart.com.smartcloudfire_inspction");//@@7.13只传当前应用
                 mContext.sendBroadcast(in);
                 getActivity().finish();//@@7.17
                 break;

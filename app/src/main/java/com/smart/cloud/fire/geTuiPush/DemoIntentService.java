@@ -15,12 +15,16 @@ import android.support.v4.app.NotificationCompat;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.zxing.common.StringUtils;
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.PushManager;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTNotificationMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
+import com.smart.cloud.fire.activity.AssetManage.TagAlarm.TagAlarmInfo;
+import com.smart.cloud.fire.activity.AssetManage.TagAlarm.TagAlarmPushActivity;
 import com.smart.cloud.fire.activity.UploadAlarmInfo.UploadAlarmInfoActivity;
 import com.smart.cloud.fire.global.ConstantValues;
 import com.smart.cloud.fire.global.MyApp;
@@ -29,6 +33,8 @@ import com.smart.cloud.fire.mvp.Alarm.UserAlarmActivity;
 import com.smart.cloud.fire.mvp.Alarm.WorkingTimeActivity;
 import com.smart.cloud.fire.mvp.LineChart.LineChartActivity;
 import com.smart.cloud.fire.mvp.fragment.MapFragment.HttpError;
+import com.smart.cloud.fire.order.OrderList.OrderListActivity;
+import com.smart.cloud.fire.order.OrderNotice.OrderNoticeActivity;
 import com.smart.cloud.fire.pushmessage.DisposeAlarm;
 import com.smart.cloud.fire.pushmessage.GetUserAlarm;
 import com.smart.cloud.fire.pushmessage.PushAlarmMsg;
@@ -85,6 +91,35 @@ public class DemoIntentService extends GTIntentService {
         boolean showDateChange=false;
         try {
             JSONObject dataJson = new JSONObject(msg);
+
+            if(dataJson.has("type")&&dataJson.getInt("type")==1){//标签报警推送
+                Gson gson=new Gson();
+                TagAlarmInfo info=gson.fromJson(msg,TagAlarmInfo.class);
+                Intent intent=new Intent(context, TagAlarmPushActivity.class);
+                intent.putExtra("info",info);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return;
+            }
+
+            if(dataJson.has("jkey")){//临时任务推送
+                Intent intent=new Intent(context, OrderNoticeActivity.class);
+                intent.putExtra("title",dataJson.getString("title"));
+                intent.putExtra("content",dataJson.getString("description"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return;
+            }
+
+            if(dataJson.has("notice")){//资产推送
+                Intent intent=new Intent(context, OrderNoticeActivity.class);
+                intent.putExtra("title",dataJson.getString("title"));
+                intent.putExtra("content",dataJson.getString("memo"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                return;
+            }
+
             String alarmTime=null;
             if(dataJson.has("alarmTime")){
                 alarmTime=dataJson.getString("alarmTime");
@@ -100,7 +135,6 @@ public class DemoIntentService extends GTIntentService {
             if(null!=alarmTime&&(System.currentTimeMillis()-TimeFormat.date2TimeStamp(alarmTime))>30*60*1000){
                 return;
             }
-
             int alarm =0;
             if(dataJson.has("alarmType")){
                 alarm = dataJson.getInt("alarmType");
@@ -130,7 +164,7 @@ public class DemoIntentService extends GTIntentService {
             int deviceType = dataJson.getInt("deviceType");
             switch (deviceType){
                 case 224:
-                case 221://@@6.30有线烟感
+                case 221:
                     JSONObject WiredJson =dataJson.getJSONObject("masterFault");
                     String wiredMessage="发生"+WiredJson.getString("faultType");
                     PushWiredSmokeAlarmMsg mPushAlarmMsg2 = jsJson2(dataJson.getJSONObject("masterFault"));
@@ -203,6 +237,7 @@ public class DemoIntentService extends GTIntentService {
                 case 119://联动烟感
                 case 124://@@外接水位
                 case 125://@@外接水压
+                case 131:
                     String message = null;
                     int alarmType = dataJson.getInt("alarmType");
                     switch (deviceType){
@@ -300,6 +335,21 @@ public class DemoIntentService extends GTIntentService {
                                 message="低电压已恢复";
                             }else{
                                 message="发生未知类型报警";
+                            }
+                            break;
+                        case 131:
+                            if(alarmType==503) {
+                                message="发生移动报警";
+                            }else if(alarmType==504){
+                                message="该设备发生倾斜";
+                            }else if(alarmType==505){
+                                message="发生跌落报警";
+                            }else if(alarmType==193){
+                                message="发生低电压报警";
+                            }else if(alarmType==506){
+                                message="发生离区报警";
+                            }else{
+                                message="发生报警";
                             }
                             break;
                         case 124:
@@ -737,6 +787,10 @@ public class DemoIntentService extends GTIntentService {
         mPushAlarmMsg.setAlarmTime(dataJson.getString("alarmTime"));
         mPushAlarmMsg.setDeviceType(dataJson.getInt("deviceType"));
         mPushAlarmMsg.setAlarmFamily(dataJson.getInt("alarmFamily"));
+        if(dataJson.has("akey")||dataJson.has("assetName")){
+            mPushAlarmMsg.setAkey(dataJson.getString("akey"));
+            mPushAlarmMsg.setAssetName(dataJson.getString("assetName"));
+        }
         if(dataJson.has("alarmTypeName")){
             mPushAlarmMsg.setAlarmTypeName(dataJson.getString("alarmTypeName"));
         }
@@ -788,7 +842,9 @@ public class DemoIntentService extends GTIntentService {
 
     @Override
     public void onNotificationMessageClicked(Context context, GTNotificationMessage gtNotificationMessage) {
-
+        Intent i=new Intent(MyApp.app, OrderListActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        MyApp.app.startActivity(i);
     }
 
 

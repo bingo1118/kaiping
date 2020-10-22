@@ -107,7 +107,8 @@
                 android:id="@+id/setting_nfc"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/list_item_color_bg">
+                android:background="@drawable/list_item_color_bg"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/nfc_image"
                     android:layout_width="20dp"
@@ -124,8 +125,7 @@
                     android:text="电子标签"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/camera_list_tv"
-                    />
+                    android:textColor="@color/camera_list_tv"/>
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="wrap_content"
@@ -186,7 +186,8 @@
                 android:id="@+id/setting_nfc_period"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/list_item_color_bg">
+                android:background="@drawable/list_item_color_bg"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/nfc_period_image"
                     android:layout_width="20dp"
@@ -281,7 +282,8 @@
                 android:id="@+id/setting_help_wifi"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/list_item_color_bg">
+                android:background="@drawable/list_item_color_bg"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/rela_wifi"
                     android:layout_width="20dp"

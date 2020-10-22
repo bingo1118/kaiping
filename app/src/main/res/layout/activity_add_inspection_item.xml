@@ -74,7 +74,7 @@
                     android:background="@drawable/edit_view_bg"
                     android:enabled="false"
                     android:gravity="center_vertical"
-                    android:hint="@string/add_fire_mac"
+                    android:hint="UID"
                     android:imeOptions="actionNext"
                     android:padding="6dp"
                     android:textColorHint="@color/hint_color_text"

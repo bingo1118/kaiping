@@ -70,7 +70,22 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
 
     private void init() {
         addFireZjq.setEditTextHint("区域");
+        addFireZjq.initData("");
         add_fire_point.setEditTextHint("管理员");
+        add_fire_point.setmOnClick(new BingoDropDowmListView.OnClick() {
+            @Override
+            public void onClick() {
+
+                    if(addFireZjq.getSelecedId()==null){
+                        T.showShort(mContext,"请先选择区域");
+                        return;
+                    }
+                    mvpPresenter.getManagers(addFireZjq.getSelecedId());
+//                    add_fire_point.setClickable(false);
+//                    add_fire_point.showLoading();
+
+            }
+        });
         RxView.clicks(addFireDevBtn).throttleFirst(2, TimeUnit.SECONDS).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
@@ -142,7 +157,7 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
     @Override
     public void getUsers(ArrayList<BingoViewModel> shopTypes) {
         add_fire_point.setItemsData(shopTypes);
-        add_fire_point.showPopWindow();
+//        add_fire_point.showPopWindow();
         add_fire_point.setClickable(true);
         add_fire_point.closeLoading();
     }
@@ -183,6 +198,7 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
         addFireZjq.setEditTextData("");//@@10.19
         add_fire_point.setEditTextData("");
         select_photo_view.deleteTempPhoto();
+        memo_edit.setText("");
     }
 
     /**
@@ -198,16 +214,22 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
 
         String memo=memo_edit.getText().toString().trim();
 
-        if(smokeName.length()==0||smokeName.length()==0){
+        if(smokeName.length()==0){
             T.showShort(mContext,"请填写名称");
             return;
         }
+
+        if(address.length()==0){
+            T.showShort(mContext,"请填写地址");
+            return;
+        }
+
         if(areaId==null||areaId.length()==0){
             T.showShort(mContext,"请填选择区域");
             return;
         }
         if(managerId==null||managerId.length()==0){
-            T.showShort(mContext,"请填选择类型");
+            T.showShort(mContext,"请填选择管理员");
             return;
         }
 

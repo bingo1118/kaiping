@@ -1,7 +1,6 @@
 package com.smart.cloud.fire.activity.Inspection.UploadInspectionInfo;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -18,11 +17,8 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +51,7 @@ import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 import com.smart.cloud.fire.utils.UploadUtil;
 import com.smart.cloud.fire.utils.VolleyHelper;
+import com.smart.cloud.fire.view.TakePhoto.Photo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +110,6 @@ public class UploadInspectionInfoActivity extends Activity {
 
     private boolean mWriteMode = false;
     NfcAdapter mNfcAdapter;
-    AlertDialog alertDialog;
     PendingIntent mNfcPendingIntent;
     IntentFilter[] mWriteTagFilters;
     IntentFilter[] mNdefExchangeFilters;
@@ -129,23 +125,6 @@ public class UploadInspectionInfoActivity extends Activity {
     private String imageFilePath;
     File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/filename.jpg");//@@9.30
 
-    Handler handler = new Handler() {//@@9.29
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    mProgressBar.setVisibility(View.GONE);
-                    break;
-                case 1:
-                    mProgressBar.setVisibility(View.VISIBLE);
-                    break;
-                case 2:
-                    toast("图片上传失败");
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
-
     String uid;
     String pid;
     String tid;
@@ -154,6 +133,11 @@ public class UploadInspectionInfoActivity extends Activity {
     String memo;
     String modify;
     boolean showMemoTv=false;
+
+    String startdate;
+    String enddate;
+    String tasktype;
+
 
 
 
@@ -173,6 +157,9 @@ public class UploadInspectionInfoActivity extends Activity {
         tid=getIntent().getStringExtra("tid");
         memo=getIntent().getStringExtra("memo");
         modify=getIntent().getStringExtra("modify");
+        startdate=getIntent().getStringExtra("startdate");
+        enddate=getIntent().getStringExtra("enddate");
+        tasktype=getIntent().getStringExtra("tasktype");
         tuid=getIntent().getStringExtra("tuid");
         if(modify!=null&&modify.length()>0){
             getRecentRecord();
@@ -183,7 +170,7 @@ public class UploadInspectionInfoActivity extends Activity {
             f.delete();
         }//@@9.30
         if (mNfcAdapter==null) {
-            toast("设备不支持NFC功能");
+            T.showShort(mContext,"设备不支持NFC功能");
             return;
         }
         initNFC();
@@ -219,10 +206,8 @@ public class UploadInspectionInfoActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                toast("网络错误");
-                Message message = new Message();
-                message.what = 0;
-                handler.sendMessage(message);
+                T.showShort(mContext,"网络错误");
+                dismissProgressBarOnUiThread();
             }
         });
         mQueue.add(jsonObjectRequest);
@@ -249,19 +234,12 @@ public class UploadInspectionInfoActivity extends Activity {
                                 addFireAddress.setText(response.getString("address"));
                                 area_name.setText(response.getString("areaName"));
                                 device_type_name.setText(response.getString("deviceTypeName"));
-//                                questionJson=response.getString("questionTypes");
                             }
                             questionJson=response.getString("questionTypes");
                             dealwithQuestionJson(questionJson);
 
                             if(tid==null||tid.equals("")){
                                 tid=response.getString("tid");
-                            }
-                            if(tuid==null||tuid.equals("null")){
-                                tuid=response.getString("tuid");
-                                if(tuid==null||tuid.equals("null")){
-                                    T.showShort(mContext,"该巡检项目当前没有巡检任务");
-                                }
                             }
                             pid=response.getString("pid");
                         } catch (JSONException e) {
@@ -271,15 +249,17 @@ public class UploadInspectionInfoActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                toast("网络错误");
-                Message message = new Message();
-                message.what = 0;
-                handler.sendMessage(message);
+                T.showShort(mContext,"网络错误");
+                showProgressBarOnUiThread();
             }
         });
         mQueue.add(jsonObjectRequest);
     }
 
+    String pathtemp;
+    int nowIndex;
+    String photonametemp;
+    String pathParent;
     private void dealwithQuestionJson(String questionJson) {
         try {
             JSONArray jsonArray=new JSONArray(questionJson);
@@ -306,6 +286,32 @@ public class UploadInspectionInfoActivity extends Activity {
             }
             questionAdapter=new QuestionAdapter(mContext,listQ);
             question_recyclerview.setLayoutManager(new LinearLayoutManager(mContext));
+            questionAdapter.setmOnClickListener(new QuestionAdapter.OnClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    nowIndex=position;
+                    photonametemp = System.currentTimeMillis()+"";
+                    pathParent= Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator
+                            +"uploadtemp"+File.separator;
+                    File fileParent=new File(pathParent);
+                    if(!fileParent.exists()){
+                        fileParent.mkdirs();
+                    }
+                    pathtemp= pathParent+photonametemp+".jpg";
+                    File file=new File(pathtemp);
+                    if(!file.exists()){
+                        try {
+                            file.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    Uri imageFileUri = Uri.fromFile(file);//获取文件的Uri
+                    Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//跳转到相机Activity
+                    it.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageFileUri);//告诉相机拍摄完毕输出图片到指定的Uri
+                    ((Activity)mContext).startActivityForResult(it, 147);
+                }
+            });
             question_recyclerview.setAdapter(questionAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -333,25 +339,19 @@ public class UploadInspectionInfoActivity extends Activity {
         addFireDevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Message message = new Message();
-                message.what = 1;
-                handler.sendMessage(message);
+                showProgressBarOnUiThread();
                 if(uid_name.getText()==null||uid_name.getText().toString().equals("")){
-                    toast("请先录入设备标签信息");
-                    Message message1 = new Message();
-                    message.what = 0;
-                    handler.sendMessage(message1);
+                    T.showShort(mContext,"请先录入设备标签信息");
+                    dismissProgressBarOnUiThread();
                     return;
                 }
                 String answer="";
                 if(questionAdapter!=null){
-                    answer=questionAdapter.getAnwserJson();
+                    answer=questionAdapter.getAnwserJsonNew();
                 }
                 if(answer==null){
-                    toast("请完成所有选项");
-                    Message message1 = new Message();
-                    message.what = 0;
-                    handler.sendMessage(message1);
+                    T.showShort(mContext,"请完成所有选项");
+                    dismissProgressBarOnUiThread();
                     return;
                 }
 
@@ -359,8 +359,6 @@ public class UploadInspectionInfoActivity extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-
                         boolean isSuccess=false;
                         boolean isHavePhoto=false;
                         if(imageFilePath!=null){
@@ -370,6 +368,12 @@ public class UploadInspectionInfoActivity extends Activity {
                                 isHavePhoto=true;
                             }//@@11.07
                             isSuccess= UploadUtil.uploadFile(file,userID,areaId,uploadTime,"","cheakImg");
+                        }
+                        for(Question q:listQ){
+                            for(Photo p:q.getPhotos()){
+                                File file = new File(p.getPath());
+                                UploadUtil.uploadFile(file,userID,areaId,uploadTime,"","cheakImg");
+                            }
                         }
                         VolleyHelper helper=VolleyHelper.getInstance(mContext);
                         RequestQueue mQueue = helper.getRequestQueue();
@@ -384,28 +388,30 @@ public class UploadInspectionInfoActivity extends Activity {
                                         +"&tid="+tid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
                                         +"&photo1="+uploadTime+imageFilePath.substring(imageFilePath.lastIndexOf("."));
                             }else{
-                                String answer=questionAdapter.getAnwserJson();
-                                url= ConstantValues.SERVER_IP_NEW+"postResult?userId="+userID+"&uid="+uid_name.getText().toString()
+                                url= ConstantValues.SERVER_IP_NEW+"postResult?workerId="+userID+"&uid="+uid_name.getText().toString()
                                         +"&tid="+tid+"&pid="+pid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
-                                        +"&photo1="+uploadTime+imageFilePath.substring(imageFilePath.lastIndexOf("."))
-                                        +"&questionJson="+URLEncoder.encode(finalAnswer)+"&tuid="+tuid;
+                                        +"&imgs="+uploadTime+imageFilePath.substring(imageFilePath.lastIndexOf("."))
+                                        +"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype;
 
                             }
 
                         }else{
                             if(isHavePhoto&&!isSuccess){
-                                Message message= new Message();
-                                message.what = 2;
-                                handler.sendMessage(message);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        T.showShort(mContext,"图片上传失败");
+                                    }
+                                });
                             }
                             if(modify!=null&&modify.length()>0){
                                 url= ConstantValues.SERVER_IP_NEW+"updateResult?tuid="+tuid+"&uid="+uid_name.getText().toString()
                                         +"&tid="+tid+"&pid="+pid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
                                         +"&photo1=";
                             }else{
-                                url= ConstantValues.SERVER_IP_NEW+"postResult?userId="+userID+"&uid="+uid_name.getText().toString()
+                                url= ConstantValues.SERVER_IP_NEW+"postResult?workerId="+userID+"&uid="+uid_name.getText().toString()
                                         +"&tid="+tid+"&pid="+pid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
-                                        +"&photo1="+"&questionJson="+URLEncoder.encode(finalAnswer)+"&tuid="+tuid;
+                                        +"&imgs="+"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype;;
                             }
 
                         }
@@ -418,31 +424,29 @@ public class UploadInspectionInfoActivity extends Activity {
                                             int errorCode=response.getInt("errorCode");
                                             String error=response.getString("error");
                                             if(errorCode==0){
-                                                toast("记录上传成功");
+                                                T.showShort(mContext,"记录上传成功");
                                                 clearView();
+                                                File ftemp=new File(pathParent);
+                                                if(ftemp.exists()){
+                                                    ftemp.delete();
+                                                }
                                                 if(f.exists()){
                                                     f.delete();
                                                 }//@@9.30
                                             }else{
-                                                toast(error);
+                                                T.showShort(mContext,error);
                                             }
-                                            Message message = new Message();
-                                            message.what = 0;
-                                            handler.sendMessage(message);
+                                            dismissProgressBarOnUiThread();
                                         } catch (JSONException e) {
                                             e.printStackTrace();
-                                            Message message = new Message();
-                                            message.what = 0;
-                                            handler.sendMessage(message);
+                                            dismissProgressBarOnUiThread();
                                         }
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                toast("网络错误");
-                                Message message = new Message();
-                                message.what = 0;
-                                handler.sendMessage(message);
+                                T.showShort(mContext,"网络错误");
+                                dismissProgressBarOnUiThread();
                             }
                         });
                         mQueue.add(jsonObjectRequest);
@@ -524,6 +528,19 @@ public class UploadInspectionInfoActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case 147:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bitmap bmp = BitmapFactory.decodeFile(pathtemp);
+                    try {
+                        saveFile(compressBySize(pathtemp,1500,2000),pathtemp);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    listQ.get(nowIndex).getPhotos().add(new Photo(photonametemp,pathtemp));
+                    questionAdapter.notifyItemChanged(nowIndex);
+                    question_recyclerview.scrollToPosition(nowIndex);
+                }
+                break;
             case 102:
                 if (resultCode == Activity.RESULT_OK) {
                     Bitmap bmp = BitmapFactory.decodeFile(imageFilePath);
@@ -765,17 +782,17 @@ public class UploadInspectionInfoActivity extends Activity {
                 ndef.connect();
 
                 if (!ndef.isWritable()) {
-                    toast("Tag is read-only.");
+                    T.showShort(mContext,"Tag is read-only.");
                     return false;
                 }
                 if (ndef.getMaxSize() < size) {
-                    toast("Tag capacity is " + ndef.getMaxSize() + " bytes, message is " + size
+                    T.showShort(mContext,"Tag capacity is " + ndef.getMaxSize() + " bytes, message is " + size
                             + " bytes.");
                     return false;
                 }
 
                 ndef.writeNdefMessage(message);
-                toast("写入数据成功.");
+                T.showShort(mContext,"写入数据成功.");
                 return true;
             } else {
                 NdefFormatable format = NdefFormatable.get(tag);
@@ -783,19 +800,19 @@ public class UploadInspectionInfoActivity extends Activity {
                     try {
                         format.connect();
                         format.format(message);
-                        toast("Formatted tag and wrote message");
+                        T.showShort(mContext,"Formatted tag and wrote message");
                         return true;
                     } catch (IOException e) {
-                        toast("Failed to format tag.");
+                        T.showShort(mContext,"Failed to format tag.");
                         return false;
                     }
                 } else {
-                    toast("Tag doesn't support NDEF.");
+                    T.showShort(mContext,"Tag doesn't support NDEF.");
                     return false;
                 }
             }
         } catch (Exception e) {
-            toast("写入数据失败");
+            T.showShort(mContext,"写入数据失败");
         }
 
         return false;
@@ -819,9 +836,22 @@ public class UploadInspectionInfoActivity extends Activity {
         }
     }
 
+    private void showProgressBarOnUiThread() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 
-    private void toast(String text) {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+    private void dismissProgressBarOnUiThread(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
 }

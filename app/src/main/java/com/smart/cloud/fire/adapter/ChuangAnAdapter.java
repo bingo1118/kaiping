@@ -97,7 +97,7 @@ public class ChuangAnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ElectricOne=electric.getId();//@@2018.01.22
             ((ItemViewHolder) holder).tvImage.setVisibility(View.VISIBLE);
             ((ItemViewHolder) holder).electricLin.setVisibility(View.VISIBLE);
-            ((ItemViewHolder) holder).electricName.setText("线路"+ElectricOne);
+            ((ItemViewHolder) holder).electricName.setText("线路" + ElectricOne);
             ((ItemViewHolder) holder).electricAlarmValue.setText(electric.getTime());
 
             ((ItemViewHolder) holder).electricCurrentValue.setText(value);

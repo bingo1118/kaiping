@@ -68,7 +68,7 @@ public class UploadMsgActivity extends Activity {
                         try {
                             int errorCode=response.getInt("errorCode");
                             if(errorCode==0){
-
+                                T.showShort(mContext,response.getString("error"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

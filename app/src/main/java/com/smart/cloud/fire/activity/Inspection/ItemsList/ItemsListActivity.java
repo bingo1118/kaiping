@@ -42,8 +42,6 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
     TextView progress_tv;
     @Bind(R.id.change)
     TextView change;
-    @Bind(R.id.change_iv)
-    ImageView change_iv;
     @Bind(R.id.search_bingo)
     BingoSearchView search_bingo;
 
@@ -71,10 +69,9 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
+        change.setVisibility(View.GONE);
         if(tid!=null&&tid.length()>0){
             mPresenter.getTaskItems(tid,state);
-            change.setVisibility(View.VISIBLE);
-            change_iv.setVisibility(View.VISIBLE);
         }else if(pid!=null&&pid.length()>0){
 //            mPresenter.getPointItems(pid);
             mPresenter.getAllItems("",pid);
@@ -82,38 +79,24 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
             mPresenter.getAllItems(userID,"");
         }
         swipereFreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(tid!=null&&tid.length()>0){
-                    mPresenter.getTaskItems(tid,state);
-                }else if(pid!=null&&pid.length()>0){
+                @Override
+                public void onRefresh() {
+                    if(tid!=null&&tid.length()>0){
+                        mPresenter.getTaskItems(tid,state);
+                    }else if(pid!=null&&pid.length()>0){
 //            mPresenter.getPointItems(pid);
-                    mPresenter.getAllItems("",pid);
-                }else{
-                    mPresenter.getAllItems(userID,"");
+                        mPresenter.getAllItems("",pid);
+                    }else{
+                        mPresenter.getAllItems(userID,"");
+                    }
                 }
-        }
         });
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(state.equals("0")){
-                    state="1";
-                    change.setText("未巡检项目");
-                }else{
-                    state="0";
-                    change.setText("已巡检项目");
-                }
-                mPresenter.getTaskItems(tid,state);
-            }
-        });
+
         search_bingo.setListener(new BingoSearchView.OnGetSearchTextListener() {
             @Override
             public void onGetText(String text) {
                 if(tid!=null&&tid.length()>0){
                     mPresenter.getTaskItemsByName(tid,state);
-                    change.setVisibility(View.GONE);
-                    change_iv.setVisibility(View.GONE);
                 }else if(pid!=null&&pid.length()>0){
                     mPresenter.getItemsByName(pid,text);
                 }else{

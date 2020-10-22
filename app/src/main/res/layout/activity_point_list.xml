@@ -18,6 +18,7 @@
             android:layout_height="30dp"
             android:src="@drawable/shouye_gongdan"
             android:layout_alignParentLeft="true"
+            android:visibility="gone"
             android:layout_margin="10dp"/>
 
         <TextView

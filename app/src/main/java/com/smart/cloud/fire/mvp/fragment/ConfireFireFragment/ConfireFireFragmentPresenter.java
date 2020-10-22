@@ -548,6 +548,12 @@ public class ConfireFireFragmentPresenter extends BasePresenter<ConfireFireFragm
                         smokeMac = smokeMac.substring(1, macLenghth-1);
                     }
                     break;
+                case "Z":
+                    if(smokeMac.endsWith("P")){
+                        deviceType="131";
+                        smokeMac = smokeMac.substring(1, macLenghth-1);
+                    }
+                    break;
             }
             if(smokeMac.length()<8){
                 devType.setError("设备MAC号长度不正确");

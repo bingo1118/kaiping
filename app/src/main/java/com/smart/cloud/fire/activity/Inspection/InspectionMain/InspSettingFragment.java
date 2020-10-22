@@ -17,7 +17,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.smart.cloud.fire.activity.AddDev.ChioceDevTypeActivity;
+import com.smart.cloud.fire.activity.AssetManage.AssetHomeActivity;
+import com.smart.cloud.fire.activity.AssetManage.AssetManagerActivity;
 import com.smart.cloud.fire.activity.Camera.CameraDevActivity;
+import com.smart.cloud.fire.activity.Host.HostActivity;
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNFCItemActivity;
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNormalItemActivity;
 import com.smart.cloud.fire.activity.Inspection.InspectionMap.InspectionMapActivity;
@@ -54,17 +57,21 @@ public class InspSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragmnet_insp_setting, container, false);
         ButterKnife.bind(this, view);
         mContext=getActivity();
-        getNoticeCount();
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNoticeCount();
+    }
 
     private void getNoticeCount() {
         VolleyHelper helper=VolleyHelper.getInstance(mContext);
         RequestQueue mQueue = helper.getRequestQueue();
         String url="";
 
-        url= ConstantValues.SERVER_IP_NEW+"getNoticeByUserId?uid="+ MyApp.getUserID();
+        url= ConstantValues.SERVER_IP_NEW+"getNoticeByUserId?userId="+ MyApp.getUserID();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
@@ -102,7 +109,7 @@ public class InspSettingFragment extends Fragment {
     @OnClick({R.id.insp_add_normal_ib,R.id.insp_add_nfc_ib
             ,R.id.insp_points_ib,R.id.insp_upload_problem_ib
             ,R.id.my_image,R.id.insp_notice_ib
-            ,R.id.insp_add_fire_ib,R.id.insp_upload_msg_ib})
+            ,R.id.insp_add_fire_ib,R.id.insp_upload_msg_ib,R.id.host_info_ib,R.id.camera_ib})
     public void onClick(View v){
         Intent intent = null;
         switch (v.getId()){
@@ -129,6 +136,12 @@ public class InspSettingFragment extends Fragment {
                 break;
             case R.id.insp_upload_msg_ib:
                 intent = new Intent(mContext, UploadMsgActivity.class);
+                break;
+            case R.id.host_info_ib:
+                intent = new Intent(mContext, HostActivity.class);
+                break;
+            case R.id.camera_ib:
+                intent = new Intent(mContext, CameraDevActivity.class);
                 break;
         }
         if(intent!=null){

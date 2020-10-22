@@ -1,5 +1,8 @@
 package com.smart.cloud.fire.mvp.fragment.MapFragment;
 
+import com.smart.cloud.fire.activity.AssetManage.AssetByCkey.AssetByCkeyEntity;
+import com.smart.cloud.fire.global.AssetInfo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -253,5 +256,24 @@ public class Smoke implements Serializable,MapItem {
     @Override
     public String getLon() {
         return longitude;
+    }
+
+    private String ifAlarmName;
+    private AssetByCkeyEntity asset; //绑定的资产信息
+
+    public String getIfAlarmName() {
+        return ifAlarmName;
+    }
+
+    public void setIfAlarmName(String ifAlarmName) {
+        this.ifAlarmName = ifAlarmName;
+    }
+
+    public AssetByCkeyEntity getAsset() {
+        return asset;
+    }
+
+    public void setAsset(AssetByCkeyEntity asset) {
+        this.asset = asset;
     }
 }

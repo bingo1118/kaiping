@@ -65,35 +65,43 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         NFCInfoEntity mPoint = itemsList.get(position);
         ((ItemsListAdapter.ItemViewHolder) holder).name_tv.setText(mPoint.getDeviceName());
         String state="";
-        if(mPoint.getIscheck()!=null){
-            ((ItemViewHolder) holder).state_tv.setVisibility(View.VISIBLE);
-            ((ItemViewHolder) holder).turn_to_update.setVisibility(View.GONE);
-            if(tid==null){
-                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
-            }else{
-                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.VISIBLE);
-            }
-            switch (mPoint.getIscheck()){
-                case "0":
-                    state="未检";
-                    ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.VISIBLE);
-                    ((ItemViewHolder) holder).modify.setVisibility(View.GONE);
-                    break;
-                case "1":
-                    if(mPoint.getQualified().equals("1")){
-                        state="合格";
-                    }else{
+        ((ItemViewHolder) holder).state_tv.setVisibility(View.VISIBLE);
+        switch (mPoint.getStatus()){
+            case "0":
+                switch (mPoint.getDevicestate()){
+                    case 0:
+                        state="无任务";
+                        break;
+                    case 1:
+                        state="未检";
+                        break;
+                    case 2:
                         state="不合格";
-                    }
-                    ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
-                    ((ItemViewHolder) holder).modify.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }else{
-            ((ItemViewHolder) holder).state_tv.setVisibility(View.GONE);
-            ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
-            ((ItemViewHolder) holder).turn_to_update.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        state="合格";
+                        break;
+                }
+                break;
+            case "1":
+                state="未检";
+                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).modify.setVisibility(View.GONE);
+                break;
+            case "2":
+                state="不合格";
+                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
+//                ((ItemViewHolder) holder).modify.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).turn_to_update.setVisibility(View.VISIBLE);
+                break;
+            case "3":
+                state="合格";
+                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
+//                ((ItemViewHolder) holder).modify.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).turn_to_update.setVisibility(View.VISIBLE);
+                break;
         }
+
 
         ((ItemViewHolder) holder).worker_tv.setText("地址:"+mPoint.getAddress());
         ((ItemViewHolder) holder).state_tv.setText("状态:"+state);
@@ -107,6 +115,9 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 intent.putExtra("tid",tid);
                 intent.putExtra("memo",mPoint.getMemo());
                 intent.putExtra("tuid",mPoint.getTuid());
+                intent.putExtra("startdate",mPoint.getStartdate());
+                intent.putExtra("enddate",mPoint.getEnddate());
+                intent.putExtra("tasktype",mPoint.getTasktype());
                 mContext.startActivity(intent);
             }
         });

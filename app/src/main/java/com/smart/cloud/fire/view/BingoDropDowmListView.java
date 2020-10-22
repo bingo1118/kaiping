@@ -53,12 +53,22 @@ public class BingoDropDowmListView extends LinearLayout {
 
     private OnSelectedItem mOnSelectedItem;
 
+    public void setmOnClick(OnClick mOnClickListener) {
+        this.mOnClick = mOnClickListener;
+    }
+
+    private OnClick mOnClick;
+
     public void setmOnSelectedItem(OnSelectedItem mOnSelectedItem) {
         this.mOnSelectedItem = mOnSelectedItem;
     }
 
     public interface OnSelectedItem{
         public void onSelectedItem(String selectrdItemId);
+    }
+
+    public interface OnClick{
+        public void onClick();
     }
 
 
@@ -92,6 +102,9 @@ public class BingoDropDowmListView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
+                if(mOnClick!=null){
+                    mOnClick.onClick();
+                }
                 if (popupWindow == null) {
                     showPopWindow();
                 } else {

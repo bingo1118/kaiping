@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tianjia_bj"
     tools:context="com.smart.cloud.fire.activity.AddDev.ChioceDevTypeActivity">
     <TextView
         android:id="@+id/title_tv"
@@ -16,12 +17,12 @@
         />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_tv">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/title_tv"
-            android:background="@drawable/tianjia_bj">
+            android:layout_below="@id/title_tv">
         <TextView
             android:id="@+id/chioce_text"
             android:layout_width="match_parent"
@@ -132,12 +133,12 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/sdtj_lin"
-                android:layout_toRightOf="@id/sdtj_lin"
+                android:layout_below="@id/spjk_lin"
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:background="#fff"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:visibility="gone">
                 <ImageButton
                     android:id="@+id/nfc_btn"
                     android:layout_width="60dp"
@@ -163,11 +164,13 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/spjk_lin"
+                android:layout_below="@id/sdtj_lin"
+                android:layout_toRightOf="@id/sdtj_lin"
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:background="#fff"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                >
                 <ImageButton
                     android:id="@+id/yongchuan_btn"
                     android:layout_width="60dp"

@@ -33,6 +33,34 @@ public class NFCInfoEntity implements Serializable,MapItem {
     private String ischeck; //是否检查
     private String qualified; //是否合格
     private String tuid;
+    private String status;//1未检2合格3不合格
+    private String startdate;//任务起始时间
+    private String enddate;//任务结束时间
+    private String tasktype;//任务类型 0/1/2 临时/日/周
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
+    }
+
+    public String getTasktype() {
+        return tasktype;
+    }
+
+    public void setTasktype(String tasktype) {
+        this.tasktype = tasktype;
+    }
 
     public String getEndTime() {
         return endTime;
@@ -195,5 +223,14 @@ public class NFCInfoEntity implements Serializable,MapItem {
     @Override
     public String getLon() {
         return longitude;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

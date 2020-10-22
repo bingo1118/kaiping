@@ -88,6 +88,25 @@ public class MusicManger {
         }
     }
 
+    public void playTagAlarmMusic(Context context){
+        if(null!=player){
+            return;
+        }
+        try {
+            System.out.println("player....");
+            player = MediaPlayer.create(context, R.raw.tag);
+            player.start();
+            player.setLooping(true);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            if(null!=player){
+                player.stop();
+                player.release();
+                player = null;
+            }
+        }
+    }
+
 
 
     public void stop(){

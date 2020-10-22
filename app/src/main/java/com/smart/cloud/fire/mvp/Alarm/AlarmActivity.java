@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.blankj.utilcode.util.StringUtils;
 import com.jakewharton.rxbinding.view.RxView;
 import com.smart.cloud.fire.base.ui.MvpActivity;
 import com.smart.cloud.fire.global.ConstantValues;
@@ -97,6 +98,13 @@ public class AlarmActivity extends MvpActivity<AlarmPresenter> implements AlarmV
     @Bind(R.id.makesure_getalarm)
     Button makesure_getalarm;
 
+    @Bind(R.id.asset_info_line)
+    LinearLayout asset_info_line;
+    @Bind(R.id.asset_id_tv)
+    TextView asset_id_tv;
+    @Bind(R.id.asset_name_tv)
+    TextView asset_name_tv;
+
     private Context mContext;
     private PushAlarmMsg mPushAlarmMsg;
     private int TIME_OUT = 20;
@@ -154,6 +162,13 @@ public class AlarmActivity extends MvpActivity<AlarmPresenter> implements AlarmV
         String uploadpeople=null;
         if(mPushAlarmMsg!=null){
             uploadpeople=mPushAlarmMsg.getUploadpeople();
+            if(StringUtils.isEmpty(mPushAlarmMsg.getAkey())){
+                asset_info_line.setVisibility(View.GONE);
+            }else{
+                asset_info_line.setVisibility(View.VISIBLE);
+                asset_id_tv.setText("资产编号:"+mPushAlarmMsg.getAkey());
+                asset_name_tv.setText("资产名称:"+mPushAlarmMsg.getAssetName());
+            }
         }
 
         if(uploadpeople!=null&&uploadpeople.length()>0){
@@ -380,7 +395,7 @@ public class AlarmActivity extends MvpActivity<AlarmPresenter> implements AlarmV
                     mNormalSmoke.setLongitude(mPushAlarmMsg.getLongitude() + "");
                     mNormalSmoke.setLatitude(mPushAlarmMsg.getLatitude() + "");
                     Reference<Activity> reference = new WeakReference(mContext);
-                    new InitBaiduNavi(reference.get(), mNormalSmoke);//导航
+                    new InitBaiduNavi(reference.get(), mNormalSmoke);
                 }
             });
         }

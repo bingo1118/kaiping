@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"></com.smart.cloud.fire.view.BingoDropDowmListView>
+            android:layout_marginRight="5dp"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

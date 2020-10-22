@@ -34,6 +34,7 @@ import com.smart.cloud.fire.global.MyApp;
 import com.smart.cloud.fire.global.ProofGasEntity;
 import com.smart.cloud.fire.global.TemperatureTime;
 import com.smart.cloud.fire.mvp.electricChangeHistory.ElectricChangeHistoryActivity;
+import com.smart.cloud.fire.utils.BingoDialog;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 import com.smart.cloud.fire.utils.Utils;
@@ -196,8 +197,7 @@ public class LineChartActivity extends MvpActivity<LineChartPresenter> implement
                     case R.id.yuzhi_set:
                         LayoutInflater inflater = getLayoutInflater();
                         View layout = inflater.inflate(R.layout.water_threshold_setting,(ViewGroup) findViewById(R.id.rela));
-                        AlertDialog.Builder builder=new AlertDialog.Builder(context).setView(layout);
-                        final AlertDialog dialog=builder.create();
+                        BingoDialog dialog=new BingoDialog(mActivity,layout);
                         final EditText high_value=(EditText)layout.findViewById(R.id.high_value);
                         final EditText low_value=(EditText)layout.findViewById(R.id.low_value);
                         Button commit=(Button)layout.findViewById(R.id.commit);
@@ -776,8 +776,7 @@ public class LineChartActivity extends MvpActivity<LineChartPresenter> implement
                     high_value_name.setText("高水位阈值（m）:");
                     low_value_name.setText("低水位阈值（m）:");
                 }
-                AlertDialog.Builder builder=new AlertDialog.Builder(this).setView(layout);
-                final AlertDialog dialog=builder.create();
+                BingoDialog dialog =new BingoDialog(this,layout);
                 Button commit=(Button)layout.findViewById(R.id.commit);
                 commit.setOnClickListener(new View.OnClickListener() {
                     @Override

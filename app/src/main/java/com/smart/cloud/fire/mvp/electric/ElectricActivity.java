@@ -46,6 +46,7 @@ import com.smart.cloud.fire.global.ElectricValue;
 import com.smart.cloud.fire.global.MyApp;
 import com.smart.cloud.fire.mvp.LineChart.LineChartActivity;
 import com.smart.cloud.fire.mvp.electricChangeHistory.ElectricChangeHistoryActivity;
+import com.smart.cloud.fire.utils.BingoDialog;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 import com.smart.cloud.fire.utils.VolleyHelper;
@@ -210,8 +211,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         LayoutInflater inflater = getLayoutInflater();
         View layout= inflater.inflate(R.layout.electr_yuzhi_setting,(ViewGroup) findViewById(R.id.rela));
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(mContext).setView(layout);
-        final AlertDialog dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
         final EditText high_value=(EditText)layout.findViewById(R.id.high_value);
         high_value.setText(yuzhi43);
         final EditText low_value=(EditText)layout.findViewById(R.id.low_value);
@@ -498,8 +498,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         LayoutInflater inflater = getLayoutInflater();
         View layout= inflater.inflate(R.layout.ut_electr_threshold_setting,(ViewGroup) findViewById(R.id.rela));
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(mContext).setView(layout);
-        final AlertDialog dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
         final EditText high_value=(EditText)layout.findViewById(R.id.high_value);
         high_value.setText(yuzhi43);
         final EditText low_value=(EditText)layout.findViewById(R.id.low_value);
@@ -676,8 +675,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         LayoutInflater inflater = getLayoutInflater();
         View layout= inflater.inflate(R.layout.ut_fenli_setting,(ViewGroup) findViewById(R.id.rela));
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(mContext).setView(layout);
-        final AlertDialog dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
 
         final RadioGroup fenli_switch=(RadioGroup)layout.findViewById(R.id.radio_group);
         final RadioButton btn_on=(RadioButton)layout.findViewById(R.id.on);
@@ -788,8 +786,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         LayoutInflater inflater = getLayoutInflater();
         View layout= inflater.inflate(R.layout.ut_hearttime_settting,(ViewGroup) findViewById(R.id.rela));
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(mContext).setView(layout);
-        final AlertDialog dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
 
         final EditText fenliHoldTime_value=(EditText)layout.findViewById(R.id.heartime_set);
 
@@ -941,12 +938,9 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
     private void gotoYuzhiSet() {
         LayoutInflater inflater;
         View layout;
-        AlertDialog.Builder builder;
-        final AlertDialog dialog;
         inflater = getLayoutInflater();
         layout = inflater.inflate(R.layout.electr_threshold_setting,(ViewGroup) findViewById(R.id.rela));
-        builder=new AlertDialog.Builder(mContext).setView(layout);
-        dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
         final EditText high_value=(EditText)layout.findViewById(R.id.high_value);
         high_value.setText(yuzhi43);
         final EditText low_value=(EditText)layout.findViewById(R.id.low_value);
@@ -1094,8 +1088,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         LayoutInflater inflater = getLayoutInflater();
         View layout= inflater.inflate(R.layout.electr_fenli_race,(ViewGroup) findViewById(R.id.rela));
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(mContext).setView(layout);
-        final AlertDialog dialog =builder.create();
+        BingoDialog dialog=new BingoDialog(this,layout);
 
         final TextView ActivePowerA=(TextView)layout.findViewById(R.id.ActivePowerA);
         final TextView ActivePowerB=(TextView)layout.findViewById(R.id.ActivePowerB);

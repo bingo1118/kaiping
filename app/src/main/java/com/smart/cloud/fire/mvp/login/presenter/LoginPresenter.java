@@ -207,6 +207,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
             @Override
             public void onCompleted() {
+
                 mvpView.hideLoading();
             }
         }));
