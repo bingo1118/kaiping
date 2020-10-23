@@ -39,6 +39,7 @@ public class TakePhotosView extends LinearLayout {
         initView();
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public TakePhotosView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         this(context, attrs, defStyleAttr);
@@ -53,9 +54,9 @@ public class TakePhotosView extends LinearLayout {
         public void onItemClick();
     };
 
-    public void setmList(List<Photo> mList) {
-        this.mList = mList;
-        adapter.setmList(mList);
+    public void setmList(List<Photo> list,boolean isShowAdd) {
+        this.mList = list;
+        adapter.setmList(mList,isShowAdd);
     }
 
     RecyclerView recyclerView;

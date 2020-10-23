@@ -7,6 +7,15 @@ public class InspHistoryEntity {
     String workerId;
     String workerName;
     String imgs;
+    String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getImgs() {
         return imgs;

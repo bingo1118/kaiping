@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -61,30 +62,39 @@ public class InspHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ((ItemViewHolder) holder).worker_tv.setText("巡检人:"+mPoint.getWorkerName());
         ((InspHistoryAdapter.ItemViewHolder) holder).state_tv.setText("状态:"+mPoint.getQualified());
 
-        String temp1= ConstantValues.NFC_IMAGES+"cheakImg/"+mPoint.getImgs();
-        Glide.with(mContext)
-                .load(temp1).thumbnail(0.00001f).listener(new RequestListener() {
-
-            @Override
-            public boolean onException(Exception arg0, Object arg1,
-                                       Target arg2, boolean arg3) {
-                //加载图片出错
-                return false;
-            }
-            @Override
-            public boolean onResourceReady(Object arg0, Object arg1,
-                                           Target arg2, boolean arg3, boolean arg4) {
-                //加载图片成功
-                ((InspHistoryAdapter.ItemViewHolder) holder).img.setBackground(null);
-                return false;
-            }
-        }).into(((InspHistoryAdapter.ItemViewHolder) holder).img);//@@9.28
-        ((InspHistoryAdapter.ItemViewHolder) holder).img.setOnClickListener(new View.OnClickListener() {
+//        String temp1= ConstantValues.NFC_IMAGES+"cheakImg/"+mPoint.getImgs();
+//        Glide.with(mContext)
+//                .load(temp1).thumbnail(0.00001f).listener(new RequestListener() {
+//
+//            @Override
+//            public boolean onException(Exception arg0, Object arg1,
+//                                       Target arg2, boolean arg3) {
+//                //加载图片出错
+//                return false;
+//            }
+//            @Override
+//            public boolean onResourceReady(Object arg0, Object arg1,
+//                                           Target arg2, boolean arg3, boolean arg4) {
+//                //加载图片成功
+//                ((InspHistoryAdapter.ItemViewHolder) holder).img.setBackground(null);
+//                return false;
+//            }
+//        }).into(((InspHistoryAdapter.ItemViewHolder) holder).img);//@@9.28
+//        ((InspHistoryAdapter.ItemViewHolder) holder).img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, NFCImageShowActivity.class);
+//                intent.putExtra("path",temp1);
+//                mContext.startActivity(intent);
+//            }
+//        });
+        ((ItemViewHolder) holder).rela.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, NFCImageShowActivity.class);
-                intent.putExtra("path",temp1);
-                mContext.startActivity(intent);
+                Intent i=new Intent(mContext,InspHIstoryItemActivity.class);
+                i.putExtra("prid",mPoint.getTuid());
+                i.putExtra("uid",mPoint.getUid());
+                mContext.startActivity(i);
             }
         });
 
@@ -109,6 +119,8 @@ public class InspHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView worker_tv;
         @Bind(R.id.img)
         ImageView img;
+        @Bind(R.id.rela)
+        RelativeLayout rela;
 
 
         public ItemViewHolder(View view) {

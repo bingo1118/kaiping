@@ -8,10 +8,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -44,10 +47,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private Context mContext;
     private List<Question> list;
+    private boolean isShowAdd;
 
-    public QuestionAdapter(Context mContext, List<Question> list) {
+    public QuestionAdapter(Context mContext, List<Question> list,boolean isShow) {
         this.mContext = mContext;
         this.list = list;
+        this.isShowAdd=isShow;
     }
 
     @NonNull
@@ -65,11 +70,34 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Question question=list.get(position);
         ((MyViewHolder) holder).quession_text.setText(question.getQdetail());
+        ((MyViewHolder) holder).question_rg.setOnCheckedChangeListener(null);//防止后续未知点击事件
+        if(question.getAnswer()==3){
+            if(question.getQjudge().equals("0")){
+                ((MyViewHolder) holder).question_rg.check(((MyViewHolder) holder).yes_rb.getId());
+                question.setAnswer(0);
+            }else{
+                ((MyViewHolder) holder).question_rg.check(((MyViewHolder) holder).no_rb.getId());
+                question.setAnswer(1);
+            }
+        }else{
+            if(question.getAnswer()==0){
+                ((MyViewHolder) holder).question_rg.check(((MyViewHolder) holder).yes_rb.getId());
+            }else{
+                ((MyViewHolder) holder).question_rg.check(((MyViewHolder) holder).no_rb.getId());
+            }
+        }
+
+        ((MyViewHolder) holder).remark_et.setText(question.getRemark());
         if(question.isFirstItem()){
             ((MyViewHolder) holder).type_tv.setVisibility(View.VISIBLE);
             ((MyViewHolder) holder).type_tv.setText(question.getQuestionType());
         }else{
             ((MyViewHolder) holder).type_tv.setVisibility(View.GONE);
+        }
+        if(question.getQjudge().equals(question.getAnswer()+"")){
+            ((MyViewHolder) holder).line.setVisibility(View.GONE);
+        }else{
+            ((MyViewHolder) holder).line.setVisibility(View.VISIBLE);
         }
         ((MyViewHolder) holder).question_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -77,16 +105,24 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 switch (checkedId){
                     case R.id.yes_rb:
                         list.get(position).setAnswer(0);
+                        if(question.getQjudge().equals("0")){
+                            ((MyViewHolder) holder).line.setVisibility(View.GONE);
+                        }else{
+                            ((MyViewHolder) holder).line.setVisibility(View.VISIBLE);
+                        }
                         break;
                     case R.id.no_rb:
                         list.get(position).setAnswer(1);
+                        if(question.getQjudge().equals("1")){
+                            ((MyViewHolder) holder).line.setVisibility(View.GONE);
+                        }else{
+                             ((MyViewHolder) holder).line.setVisibility(View.VISIBLE);
+                        }
                         break;
                 }
             }
         });
-        ((MyViewHolder) holder).yes_rb.setChecked(true);//默认选择是
-
-        ((MyViewHolder) holder).take_photo_view.setmList(question.getPhotos());
+        ((MyViewHolder) holder).take_photo_view.setmList(question.getPhotos(),isShowAdd);
         ((MyViewHolder) holder).take_photo_view.setmOnClickListener(new TakePhotosView.OnClickListener() {
             @Override
             public void onItemClick() {
@@ -95,12 +131,20 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
         });
-        ((MyViewHolder) holder).remark_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        ((MyViewHolder) holder).remark_et.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    list.get(position).setRemark(((MyViewHolder) holder).remark_et.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                list.get(position).setRemark(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -180,11 +224,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         for (Question q:list) {
             QuestionItem questionItem=new QuestionItem();
             questionItem.setQid(q.getQid()+"");
-            if(q.getQjudge().equals(q.getAnswer()+"")){
-                questionItem.setResult("0");//合格
-            }else{
-                questionItem.setResult("1");//不合格
-            }
+            questionItem.setResult(q.getAnswer()+"");//合格
             questionItem.setRemark(q.getRemark()+"");
             List<Photo> photos = q.getPhotos();
             String photoString="";
@@ -226,6 +266,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TakePhotosView take_photo_view;
         @Bind(R.id.remark_et)
         EditText remark_et;
+        @Bind(R.id.line)
+        LinearLayout line;
 
         public MyViewHolder(View itemView) {
             super(itemView);

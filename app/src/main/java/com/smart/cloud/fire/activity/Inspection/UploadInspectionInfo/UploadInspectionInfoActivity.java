@@ -284,7 +284,7 @@ public class UploadInspectionInfoActivity extends Activity {
                     }
                 }
             }
-            questionAdapter=new QuestionAdapter(mContext,listQ);
+            questionAdapter=new QuestionAdapter(mContext,listQ,true);
             question_recyclerview.setLayoutManager(new LinearLayoutManager(mContext));
             questionAdapter.setmOnClickListener(new QuestionAdapter.OnClickListener() {
                 @Override
@@ -372,7 +372,9 @@ public class UploadInspectionInfoActivity extends Activity {
                         for(Question q:listQ){
                             for(Photo p:q.getPhotos()){
                                 File file = new File(p.getPath());
-                                UploadUtil.uploadFile(file,userID,areaId,uploadTime,"","cheakImg");
+                                if(!UploadUtil.uploadFile(file,userID,areaId,p.getName(),"","cheakImg")){
+                                    T.showShort(mContext,"图片上传失败，请重试");
+                                }
                             }
                         }
                         VolleyHelper helper=VolleyHelper.getInstance(mContext);
@@ -538,7 +540,7 @@ public class UploadInspectionInfoActivity extends Activity {
                     }
                     listQ.get(nowIndex).getPhotos().add(new Photo(photonametemp,pathtemp));
                     questionAdapter.notifyItemChanged(nowIndex);
-                    question_recyclerview.scrollToPosition(nowIndex);
+//                    questionAdapter.notifyDataSetChanged();
                 }
                 break;
             case 102:
@@ -650,6 +652,12 @@ public class UploadInspectionInfoActivity extends Activity {
 //        mResumed = false;
         if (mNfcAdapter!=null) {
             mNfcAdapter.disableForegroundNdefPush(this);
+        }
+
+        //取消焦点
+        View currentFocus = getCurrentFocus();
+        if (currentFocus != null) {
+            currentFocus.clearFocus();
         }
     }
 
@@ -853,5 +861,7 @@ public class UploadInspectionInfoActivity extends Activity {
             }
         });
     }
+
+
 
 }

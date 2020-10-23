@@ -1,6 +1,7 @@
 package com.smart.cloud.fire.view.TakePhoto;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import fire.cloud.smart.com.smartcloudfire.R;
 
 import com.bumptech.glide.Glide;
+import com.smart.cloud.fire.activity.Inspection.InspHistory.InspHistoryAdapter;
+import com.smart.cloud.fire.activity.NFCDev.NFCImageShowActivity;
 
 import java.util.List;
 
@@ -19,13 +22,17 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
     private List<Photo> mList;
     private Context mContext;
 
+
+    private boolean isShowAdd=true;
+
     public  TakePhotosViewAdapter (Context context,List <Photo> list){
         mContext=context;
         mList = list;
     }
 
-    public void setmList(List<Photo> mList) {
+    public void setmList(List<Photo> mList,boolean isShowAdd) {
         this.mList = mList;
+        this.isShowAdd=isShowAdd;
         notifyDataSetChanged();
     }
 
@@ -48,9 +55,8 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position){
-
-        if(position==mList.size()){
-            holder.photo_iv.setBackgroundResource(R.drawable.add);
+        if(position == mList.size()){
+            holder.photo_iv.setImageResource(R.drawable.add);
             holder.photo_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,12 +69,19 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
             final Photo photo = mList.get(position);
             Glide.with(mContext)
                     .load(photo.getPath())
+                    .placeholder(R.drawable.photo_place)
                     .into(holder.photo_iv);
             holder.photo_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(mOnClickListener!=null){
-                        mOnClickListener.onItemClick(photo,position);
+                    if(!isShowAdd){
+                        Intent intent = new Intent(mContext, NFCImageShowActivity.class);
+                        intent.putExtra("path",photo.getPath());
+                        mContext.startActivity(intent);
+                    }else{
+                        if(mOnClickListener!=null){
+                            mOnClickListener.onItemClick(photo,position);
+                        }
                     }
                 }
             });
@@ -78,7 +91,11 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
 
     @Override
     public int getItemCount(){
-        return mList.size()+1;
+        if(isShowAdd){
+            return mList.size()+1;
+        }else {
+            return mList.size();
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
