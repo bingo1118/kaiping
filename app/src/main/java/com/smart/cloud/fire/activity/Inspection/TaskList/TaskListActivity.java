@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,33 +53,46 @@ public class TaskListActivity extends MvpActivity<TaskListPresenter> implements 
     @Bind(R.id.select_line)
     RelativeLayout select_line;
 
+    @Nullable
     @Bind(R.id.task_type_rg)
     MyRadioGroup task_type_rg;
+    @Nullable
     @Bind(R.id.task_type0)
     RadioButton task_type0;
+    @Nullable
     @Bind(R.id.task_type1)
     RadioButton task_type1;
+    @Nullable
     @Bind(R.id.task_type2)
     RadioButton task_type2;
+    @Nullable
     @Bind(R.id.task_type3)
     RadioButton task_type3;
+    @Nullable
     @Bind(R.id.task_type4)
     RadioButton task_type4;
 
+    @Nullable
     @Bind(R.id.task_state_rg)
     MyRadioGroup task_state_rg;
+    @Nullable
     @Bind(R.id.task_state0)
     RadioButton task_state0;
+    @Nullable
     @Bind(R.id.task_state1)
     RadioButton task_state1;
+    @Nullable
     @Bind(R.id.task_state2)
     RadioButton task_state2;
 
+    @Nullable
     @Bind(R.id.starttime_tv)
     TextView starttime_tv;
+    @Nullable
     @Bind(R.id.endtime_tv)
     TextView endtime_tv;
 
+    @Nullable
     @Bind(R.id.commit_tv)
     TextView commit_tv;
 

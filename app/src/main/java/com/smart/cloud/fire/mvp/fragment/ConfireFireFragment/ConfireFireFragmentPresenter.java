@@ -74,7 +74,7 @@ public class ConfireFireFragmentPresenter extends BasePresenter<ConfireFireFragm
         smokeMac=getDevType(smokeMac,"").getMac();
 
         if(smokeMac!=null&&smokeMac.length()>0){
-            Observable mObservable = apiStores1.getOneSmoke(userId,smokeMac,privilege);
+            Observable mObservable = apiStoresFire.getOneSmoke(userId,smokeMac,privilege);
             addSubscription(mObservable,new SubscriberCallBack<>(new ApiCallback<ConfireFireModel>() {
                 @Override
                 public void onSuccess(ConfireFireModel model) {
@@ -103,14 +103,14 @@ public class ConfireFireFragmentPresenter extends BasePresenter<ConfireFireFragm
     public void getPlaceTypeId(String userId, String privilege, final int type){
         Observable mObservable = null;
         if(type==1){
-            mObservable= apiStores1.getPlaceTypeId(userId,privilege,"").map(new Func1<HttpError,ArrayList<Object>>() {
+            mObservable= apiStoresFire.getPlaceTypeId(userId,privilege,"").map(new Func1<HttpError,ArrayList<Object>>() {
                 @Override
                 public ArrayList<Object> call(HttpError o) {
                     return o.getPlaceType();
                 }
             });
         }else{
-            mObservable= apiStores1.getAreaId(userId,privilege,"").map(new Func1<HttpAreaResult,ArrayList<Object>>() {
+            mObservable= apiStoresFire.getAreaId(userId,privilege,"").map(new Func1<HttpAreaResult,ArrayList<Object>>() {
                 @Override
                 public ArrayList<Object> call(HttpAreaResult o) {
                     return o.getSmoke();
@@ -184,16 +184,16 @@ public class ConfireFireFragmentPresenter extends BasePresenter<ConfireFireFragm
         mvpView.showLoading();
         Observable mObservable =null;
         if(smokeMac.length()==15&&(deviceType.equals("41")||deviceType.equals("45"))){
-            mObservable = apiStores1.addHeiMenSmoke(userID,smokeName,privilege,smokeMac,address,
+            mObservable = apiStoresFire.addHeiMenSmoke(userID,smokeName,privilege,smokeMac,address,
                     longitude,latitude,placeAddress,placeTypeId,principal1,principal1Phone,principal2,
                     principal2Phone,areaId,repeater,camera,deviceType,electrState+"");
         }else{
             if(isUploadImage){//上传图片成功
-                mObservable = apiStores1.addSmoke(userID,smokeName,privilege,smokeMac,address,
+                mObservable = apiStoresFire.addSmoke(userID,smokeName,privilege,smokeMac,address,
                         longitude,latitude,placeAddress,placeTypeId,principal1,principal1Phone,principal2,
                         principal2Phone,areaId,repeater,camera,deviceType,electrState+"",smokeMac+".jpg");
             }else{
-                mObservable = apiStores1.addSmoke(userID,smokeName,privilege,smokeMac,address,
+                mObservable = apiStoresFire.addSmoke(userID,smokeName,privilege,smokeMac,address,
                         longitude,latitude,placeAddress,placeTypeId,principal1,principal1Phone,principal2,
                         principal2Phone,areaId,repeater,camera,deviceType,electrState+"","");
             }

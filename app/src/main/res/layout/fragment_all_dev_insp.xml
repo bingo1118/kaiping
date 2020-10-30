@@ -99,21 +99,21 @@
                 android:id="@+id/dev_type0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="烟感设备"
+                android:text="传感设备"
                 android:textSize="16sp"
                 />
             <RadioButton
                 android:id="@+id/dev_type1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="水感设备"
+                android:text="水压水位"
                 android:textSize="16sp"
                 android:layout_toRightOf="@id/dev_type0"/>
             <RadioButton
                 android:id="@+id/dev_type2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="燃气设备"
+                android:text="电气设备"
                 android:textSize="16sp"
                 android:layout_toRightOf="@id/dev_type1"/>
             <RadioButton
@@ -122,6 +122,7 @@
                 android:layout_height="wrap_content"
                 android:text="电气设备"
                 android:textSize="16sp"
+                android:visibility="gone"
                 android:layout_below="@id/dev_type0"/>
 
         </com.smart.cloud.fire.view.MyRadioGroup>

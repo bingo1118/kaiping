@@ -1,6 +1,8 @@
 package com.smart.cloud.fire.view.TakePhoto;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +47,15 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
         public void onItemClick(Photo mPhoto, int position);
     };
 
+
+    public void setmOnLongClickListener(OnLongClickListener mOnLongClickListener) {
+        this.mOnLongClickListener = mOnLongClickListener;
+    }
+    OnLongClickListener mOnLongClickListener;
+    interface OnLongClickListener{
+        public void onItemLongClick(Photo mPhoto, int position);
+    };
+
     @Override
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -83,6 +94,36 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
                             mOnClickListener.onItemClick(photo,position);
                         }
                     }
+                }
+            });
+            holder.photo_iv.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(!isShowAdd){
+                        Intent intent = new Intent(mContext, NFCImageShowActivity.class);
+                        intent.putExtra("path",photo.getPath());
+                        mContext.startActivity(intent);
+                    }else{
+                        AlertDialog.Builder builder  = new AlertDialog.Builder(mContext);
+                        builder.setTitle("确认" ) ;
+                        builder.setMessage("确认删除该图片？" ) ;
+                        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(mOnLongClickListener!=null){
+                                    mOnLongClickListener.onItemLongClick(photo,position);
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.show();
+                    }
+                    return false;
                 }
             });
         }

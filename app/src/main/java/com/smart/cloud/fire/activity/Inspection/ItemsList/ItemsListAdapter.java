@@ -87,17 +87,18 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 state="未检";
                 ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.VISIBLE);
                 ((ItemViewHolder) holder).modify.setVisibility(View.GONE);
+                ((ItemViewHolder) holder).turn_to_update.setVisibility(View.GONE);
                 break;
             case "2":
                 state="不合格";
                 ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
-//                ((ItemViewHolder) holder).modify.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).modify.setVisibility(View.GONE);
                 ((ItemViewHolder) holder).turn_to_update.setVisibility(View.VISIBLE);
                 break;
             case "3":
                 state="合格";
                 ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
-//                ((ItemViewHolder) holder).modify.setVisibility(View.VISIBLE);
+                ((ItemViewHolder) holder).modify.setVisibility(View.GONE);
                 ((ItemViewHolder) holder).turn_to_update.setVisibility(View.VISIBLE);
                 break;
         }

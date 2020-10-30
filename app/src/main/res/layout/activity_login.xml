@@ -83,7 +83,7 @@
         android:layout_height="60dp"
         android:layout_below="@id/login_rela2"
         android:gravity="center"
-        >
+        android:visibility="gone">
         <TextView
             android:id="@+id/login_new_register"
             android:layout_width="wrap_content"

@@ -43,7 +43,7 @@ public class InspHistoryItemQuestionAdapter extends RecyclerView.Adapter<Recycle
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(mContext).inflate(R.layout.question_item,parent,false);
+        View view= LayoutInflater.from(mContext).inflate(R.layout.question_history_item,parent,false);
         MyViewHolder myViewHolder=new MyViewHolder(view);
         return myViewHolder;
     }

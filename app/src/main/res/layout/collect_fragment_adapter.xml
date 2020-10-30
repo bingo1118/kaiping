@@ -42,14 +42,7 @@
                     android:textColor="#e9393d"
                     android:layout_marginLeft="5dp"
                     android:text="@string/smoke_name"/>
-                <TextView
-                    android:id="@+id/smoke_mac_tv"
-                    android:layout_toRightOf="@id/smoke_mac"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#e9393d"
-                    android:layout_marginLeft="5dp"
-                    android:text="HJKDSA545FD"/>
+
 
                 <TextView
                     android:id="@+id/alarm_mark_image"
@@ -59,6 +52,18 @@
                     android:layout_marginRight="5dp"
                     android:text="报警"
                     android:textColor="@color/wifi_acclerate_red"/>
+
+                <TextView
+                    android:id="@+id/smoke_mac_tv"
+                    android:layout_toRightOf="@id/smoke_mac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#e9393d"
+                    android:layout_marginLeft="5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_toLeftOf="@id/alarm_mark_image"
+                    android:text="HJKDSA545FD"/>
 
             </RelativeLayout>
 

@@ -28,6 +28,7 @@ import java.util.Map;
 
     //2018正式新IP:139.199.58.208
     public static final String SERVER_IP_NEW ="http://106.53.66.39:8080/fireSystem/";
+    public static final String SERVER_IP_NEW_FIRE ="http://119.29.155.148:51091/fireSystem/";
 //    public static final String SERVER_IP_NEW ="http://139.199.58.208:80/assetManagement/";
 //        public static final String SERVER_IP_NEW="http://193.112.59.214:51091/fireSystem/";
 //    public static final String SERVER_IP_NEW ="http://192.168.4.88:51091/fireSystem/";
@@ -48,7 +49,7 @@ import java.util.Map;
 //    public static final String SERVER_IP_NEW ="http://192.168.0.188:8080/fireSystem/";
 
     public static boolean isThe148Service(){
-        if(SERVER_IP_NEW.contains("119.29.155.148")){
+        if(SERVER_IP_NEW.contains("119.29.155.148")||SERVER_IP_NEW.contains("106.53.66.39")){
             return true;
         }else {
             return false;

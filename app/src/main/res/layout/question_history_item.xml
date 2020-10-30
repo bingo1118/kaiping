@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/type_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/inspection_back"
+        android:text="类型"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/quession_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/type_tv"
+        android:text="问题:"/>
+
+    <RadioGroup
+        android:id="@+id/question_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quession_text"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/yes_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是"/>
+        <RadioButton
+            android:id="@+id/no_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="否"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/question_rg"
+        android:visibility="gone"
+        android:id="@+id/line">
+        <com.smart.cloud.fire.view.TakePhoto.TakePhotosView
+            android:id="@+id/take_photo_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_view_bg"
+            android:layout_below="@id/take_photo_view">
+            <EditText
+                android:id="@+id/remark_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:background="@null"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_centerVertical="true"
+                android:hint="备注"
+                android:textColorHint="@color/hint_color_text"
+                android:singleLine="false"
+                android:textColor="@color/text_view_and_kuang"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

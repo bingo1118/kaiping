@@ -35,7 +35,7 @@ public class AllSmokePresenter extends BasePresenter<AllSmokeView> {
         attachView(view);
     }
     public void getSmokeSummary(String userId, String privilege, String parentId, String areaId, String placeTypeId, String devType){
-        Observable mObservable = apiStores1.getDevSummary(userId,privilege,parentId,areaId,placeTypeId,devType);
+        Observable mObservable = apiStoresFire.getDevSummary(userId,privilege,parentId,areaId,placeTypeId,devType);
         addSubscription(mObservable,new SubscriberCallBack<>(new ApiCallback<SmokeSummary>() {
             @Override
             public void onSuccess(SmokeSummary model) {
@@ -110,7 +110,7 @@ public class AllSmokePresenter extends BasePresenter<AllSmokeView> {
 //        if(privilege.equals("1")){
 //            mObservable = apiStores1.getAllSmoke(userId,privilege,page);//@@12.20
 //        }else{
-        mObservable = apiStores1.getNeedDev2(userId,privilege,areaid,page,state,devtype);
+        mObservable = apiStoresFire.getNeedDev2(userId,privilege,areaid,page,state,devtype);
 //        }
 
         addSubscription(mObservable,new SubscriberCallBack<>(new ApiCallback<HttpError>() {

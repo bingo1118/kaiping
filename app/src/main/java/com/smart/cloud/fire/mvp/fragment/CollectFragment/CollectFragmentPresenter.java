@@ -28,9 +28,9 @@ public class CollectFragmentPresenter extends BasePresenter<CollectFragmentView>
         mvpView.showLoading();
         Observable observable=null;
         if(type==1){
-            observable = apiStores1.getAllAlarm(userId,privilege,page);
+            observable = apiStoresFire.getAllAlarm(userId,privilege,page);
         }else{
-            observable = apiStores1.getNeedAlarm(userId,privilege,startTime,endTime,areaId,placeTypeId,page,parentId);
+            observable = apiStoresFire.getNeedAlarm(userId,privilege,startTime,endTime,areaId,placeTypeId,page,parentId);
         }
         addSubscription(observable,new SubscriberCallBack<>(new ApiCallback<HttpError>() {
             @Override
@@ -113,14 +113,14 @@ public class CollectFragmentPresenter extends BasePresenter<CollectFragmentView>
     public void getPlaceTypeId(String userId, String privilege, final int type){
         Observable mObservable = null;
         if(type==1){
-            mObservable= apiStores1.getPlaceTypeId(userId,privilege,"").map(new Func1<HttpError,ArrayList<Object>>() {
+            mObservable= apiStoresFire.getPlaceTypeId(userId,privilege,"").map(new Func1<HttpError,ArrayList<Object>>() {
                 @Override
                 public ArrayList<Object> call(HttpError o) {
                     return o.getPlaceType();
                 }
             });
         }else{
-            mObservable= apiStores1.getAreaId(userId,privilege,"").map(new Func1<HttpAreaResult,ArrayList<Object>>() {
+            mObservable= apiStoresFire.getAreaId(userId,privilege,"").map(new Func1<HttpAreaResult,ArrayList<Object>>() {
                 @Override
                 public ArrayList<Object> call(HttpAreaResult o) {
                     return o.getSmoke();
@@ -169,8 +169,8 @@ public class CollectFragmentPresenter extends BasePresenter<CollectFragmentView>
     public void dealAlarmDetail(String userId, String smokeMac, String privilege, final int index
                 ,String dealPeople,String alarmTruth,String dealDetail,String image_path,String video_path){//@@5.19添加取消报警信息的位置
         mvpView.showLoading();
-        Observable mObservable = apiStores1.dealAlarmDetail(userId,smokeMac,dealPeople,alarmTruth,dealDetail,image_path,video_path);
-        final Observable Observable2 = apiStores1.getAllAlarm(userId,privilege,"1");
+        Observable mObservable = apiStoresFire.dealAlarmDetail(userId,smokeMac,dealPeople,alarmTruth,dealDetail,image_path,video_path);
+        final Observable Observable2 = apiStoresFire.getAllAlarm(userId,privilege,"1");
         twoSubscription(mObservable, new Func1<HttpError,Observable<HttpError>>() {
             @Override
             public Observable<HttpError> call(HttpError httpError) {

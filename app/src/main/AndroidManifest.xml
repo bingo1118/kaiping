@@ -307,7 +307,7 @@
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity android:name="com.smart.cloud.fire.activity.Inspection.TaskList.TaskListActivity">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <!--<action android:name="android.nfc.action.NDEF_DISCOVERED" />-->
 
                 <category android:name="android.intent.category.DEFAULT" />
 
@@ -334,19 +334,26 @@
         <activity
             android:name="com.smart.cloud.fire.ui.NoticeDialogActivity"
             android:theme="@style/TaskDialogStyle" />
-        <activity android:name="com.smart.cloud.fire.mvp.Inspction.InspMainActivity" />
+        <activity android:name="com.smart.cloud.fire.mvp.Inspction.InspMainActivity"
+            android:launchMode="singleTask"/>
         <activity android:name="com.smart.cloud.fire.activity.Inspection.InspHistory.InspHistoryActivity" />
         <activity android:name="com.smart.cloud.fire.activity.Inspection.UploadMsg.UploadMsgActivity" />
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetManagerActivity" />
-        <activity android:name="com.smart.cloud.fire.order.OrderList.OrderListActivity" />
-        <activity android:name="com.smart.cloud.fire.order.OrderInfoDetail.OrderInfoActivity" />
-        <activity android:name="com.smart.cloud.fire.order.DealOrder.DealOrderActivity" />
+        <activity android:name="com.smart.cloud.fire.order.OrderList.OrderListActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name="com.smart.cloud.fire.order.OrderInfoDetail.OrderInfoActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.DealOrderActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name="com.smart.cloud.fire.order.OrderNotice.OrderNoticeActivity"
             android:theme="@style/TaskDialogStyle" />
-        <activity android:name="com.smart.cloud.fire.order.DealOrder.ChangeDealerActivity" />
-        <activity android:name="com.smart.cloud.fire.order.DealOrder.CheakOrderActivity" />
-        <activity android:name="com.smart.cloud.fire.order.DealOrder.UploadOrderActivity" />
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.ChangeDealerActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.CheakOrderActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name="com.smart.cloud.fire.order.DealOrder.UploadOrderActivity"
+            android:launchMode="singleTop"/>
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetByCkey.AssetByCkeyActivity" />
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.DealAssetActivity" />
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.UpdateAssetDataActivity" />

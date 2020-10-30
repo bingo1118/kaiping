@@ -75,7 +75,7 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
 
     @Override
     public void getDataSuccess(List<JobOrder> smokeList) {
-        if(smokeList.size()==0){
+        if(smokeList==null||smokeList.size()==0){
             T.showShort(mContext,"无工单信息");
         }else{
             list = new ArrayList<>();

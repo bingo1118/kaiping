@@ -105,7 +105,7 @@ public class ElectricActivity extends MvpActivity<ElectricPresenter> implements 
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
-        privilege = MyApp.app.getPrivilege();
+        privilege = MyApp.app.getPrivilege2();
 //        power_change_history_text.setVisibility(View.VISIBLE);//@@8.28
         more.setVisibility(View.VISIBLE);
         more.setOnClickListener(new View.OnClickListener() {

@@ -50,6 +50,7 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
     private List<OrderInfo> list;
     private OrderInfoAdapter mAdapter;
 
+    int privilege;
     JobOrder order;
     int state;
 
@@ -81,6 +82,7 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
         order= (JobOrder) getIntent().getSerializableExtra("order");
 
         state=order.getState();
+        privilege=MyApp.getPrivilege();
         initView();
         mPresenter.getOrderInfo(order.getJkey());
         if(order.getState()==2){
@@ -126,22 +128,25 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
     }
 
     private void initView() {
-        if((state==2||state==6)&&(MyApp.getPrivilege()==11||MyApp.getPrivilege()==13)){
+        if((state==2||state==6)&&(privilege==11||privilege==13)){
             commit_btn.setVisibility(View.VISIBLE);
         }else{
             commit_btn.setVisibility(View.GONE);
         }
-        if(state==2&&MyApp.getPrivilege()!=11){
+        if((state==6||state==1)&&privilege!=11){
             change_btn.setVisibility(View.VISIBLE);
         }else{
             change_btn.setVisibility(View.GONE);
         }
-        if((state==3&&MyApp.getPrivilege()==13)||(state==6&&MyApp.getPrivilege()==31)){
+        if((state==3&&privilege==13)||(state==6&&privilege==31)){
             cheak_btn.setVisibility(View.VISIBLE);
             upload_btn.setVisibility(View.VISIBLE);
         }else{
             cheak_btn.setVisibility(View.GONE);
             upload_btn.setVisibility(View.GONE);
+        }
+        if(state==3){
+            commit_btn.setVisibility(View.GONE);
         }
         if(order!=null){
             content_tv.setText(order.getDescription());
@@ -194,7 +199,7 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
             case R.id.commit_btn:
                 intent=new Intent(OrderInfoActivity.this, DealOrderActivity.class);
                 intent.putExtra("order",order);
-                startActivity(intent);
+                startActivityForResult(intent,110);
                 break;
             case R.id.change_btn:
                 intent=new Intent(OrderInfoActivity.this, ChangeDealerActivity.class);
@@ -204,7 +209,14 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==0){
+            state=3;
+            initView();
+        }
+    }
 
     @Override
     public void getDataSuccess(List<OrderInfo> smokeList) {

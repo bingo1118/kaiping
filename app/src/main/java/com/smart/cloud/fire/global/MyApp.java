@@ -20,6 +20,7 @@ import com.smart.cloud.fire.activity.Functions.constant.Constant;
 import com.smart.cloud.fire.service.LocationService;
 import com.smart.cloud.fire.ui.ForwardDownActivity;
 import com.smart.cloud.fire.utils.AutoScreenUtils;
+import com.smart.cloud.fire.utils.CrashHandler;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 import com.squareup.leakcanary.LeakCanary;
@@ -41,7 +42,8 @@ public class MyApp extends Application {
     private Notification mNotification;
     public static final int NOTIFICATION_DOWN_ID = 0x53256562;
     private RemoteViews cur_down_view;
-    private static int privilege=-1;
+    private static int privilege=-1;//巡检系统权限
+    private static int privilege2=-1;//消防系统权限
     public LocationService locationService;
     public Vibrator mVibrator;
     public static String userid;
@@ -54,8 +56,8 @@ public class MyApp extends Application {
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(this);
         //启动集错程序
-//        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(this);
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
         //检查内存是否泄漏初始化，正式版应该关闭
         LeakCanary.install(this);
         LitePal.initialize(this);//数据库框架
@@ -118,11 +120,32 @@ public class MyApp extends Application {
         Constant.APPLY_MINE="APPLY_MINE"+userid;
         Constant.APPLY_MORE="APPLY_MORE"+userid;
     }
+    public  void setPrivilege2(int privilege){
+        if(privilege==6||privilege==7){
+            this.privilege2=3;
+        }else{
+            this.privilege2 = privilege;
+        }
+        userid=SharedPreferencesManager.getInstance().getData(MyApp.app,
+                SharedPreferencesManager.SP_FILE_GWELL,
+                SharedPreferencesManager.KEY_RECENTNAME);
+        Constant.APPLY_MINE="APPLY_MINE"+userid;
+        Constant.APPLY_MORE="APPLY_MORE"+userid;
+    }
 
 
     public static int getPrivilege(){
         //return privilege;
             return privilege;
+    }
+
+    public static int getPrivilege2(){
+        //return privilege;
+        if(privilege2==0){
+            return 3;
+        }else{
+            return privilege2;
+        }
     }
 
     public static String getUserID(){

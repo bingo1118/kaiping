@@ -111,7 +111,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                T.showShort(mContext, "很抱歉,程序出现异常,即将退出.");
+//                T.showShort(mContext, "很抱歉,程序出现异常,即将退出.");
                 Looper.loop();
             }
         }.start();
@@ -193,8 +193,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
             Date d = new Date(timestamp);
             // String time = formatter.format(new Date());
             String time = logFt.format(d);
-            // String fileName = "crash-" + time + "-" + timestamp + ".txt";
-            String fileName = "smartcloudfire-" + time + timetamp+ ".log";
+             String fileName = "crash-" + time + "-" + timestamp + ".txt";
+//            String fileName = "smartcloudfire-" + time + timetamp+ ".log";
             if (!Environment.getExternalStorageState().equals(
                     Environment.MEDIA_MOUNTED)) {
                 return null;

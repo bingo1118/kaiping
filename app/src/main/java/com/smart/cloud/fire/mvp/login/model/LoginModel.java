@@ -22,6 +22,7 @@ public class LoginModel {
     private int errorCode;
     private String name;
     private int privilege;
+    private int privilege2;
     private String error_code;
     private String UserID;
     private String P2PVerifyCode1;
@@ -161,5 +162,13 @@ public class LoginModel {
 
     public void setPrivilege(int privilege) {
         this.privilege = privilege;
+    }
+
+    public int getPrivilege2() {
+        return privilege2;
+    }
+
+    public void setPrivilege2(int privilege2) {
+        this.privilege2 = privilege2;
     }
 }

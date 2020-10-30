@@ -1,9 +1,11 @@
 package com.smart.cloud.fire.order.DealOrder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -279,6 +281,14 @@ public class DealOrderActivity extends Activity {
                                                 if (f.exists()) {
                                                     f.delete();
                                                 }//@@9.30
+                                                setResult(0,null);
+                                                new AlertDialog.Builder(mContext).setMessage("成功,点击确定返回上一页")
+                                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                finish();
+                                                            }
+                                                        }).create().show();
                                             } else {
                                                 T.showShort(mContext, error);
                                             }
@@ -607,7 +617,7 @@ public class DealOrderActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        if (nfcHelper.isSupportNFC()) {
+        if (nfcHelper!=null&&nfcHelper.isSupportNFC()) {
             nfcHelper.changeToReadMode();
         }
     }

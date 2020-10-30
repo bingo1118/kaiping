@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textColor="#000000"
+                android:visibility="gone"
                 android:text="设备类型:"/>
             <TextView
                 android:id="@+id/user_smoke_dialog_tv5"
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textColor="#000000"
+                android:visibility="gone"
                 android:text="区域:"/>
             <TextView
                 android:id="@+id/user_smoke_dialog_tv3"

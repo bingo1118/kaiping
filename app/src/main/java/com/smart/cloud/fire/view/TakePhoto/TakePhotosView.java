@@ -48,10 +48,17 @@ public class TakePhotosView extends LinearLayout {
     public void setmOnClickListener(OnClickListener mOnClickListener) {
         this.mOnClickListener = mOnClickListener;
     }
-
     public OnClickListener mOnClickListener;
     public interface OnClickListener{
         public void onItemClick();
+    };
+
+    public void setmOnLongClickListener(OnLongClickListener mOnLongClickListener) {
+        this.mOnLongClickListener = mOnLongClickListener;
+    }
+    public OnLongClickListener mOnLongClickListener;
+    public interface OnLongClickListener{
+        public void onItemLongClick(Photo photo,int i);
     };
 
     public void setmList(List<Photo> list,boolean isShowAdd) {
@@ -89,6 +96,14 @@ public class TakePhotosView extends LinearLayout {
                     Uri uri = Uri.fromFile(file);
                     intent.setDataAndType(uri,"image/*");
                     mContext.startActivity(intent);
+                }
+            }
+        });
+        adapter.setmOnLongClickListener(new TakePhotosViewAdapter.OnLongClickListener() {
+            @Override
+            public void onItemLongClick(Photo mPhoto, int position) {
+                if(mOnLongClickListener!=null){
+                    mOnLongClickListener.onItemLongClick(mPhoto,position);
                 }
             }
         });

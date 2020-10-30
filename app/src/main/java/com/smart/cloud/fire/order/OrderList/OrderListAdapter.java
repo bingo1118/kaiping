@@ -105,6 +105,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     Intent intent=new Intent(mContext, OrderInfoActivity.class);
                     intent.putExtra("order",mJobOrder);
                     mContext.startActivity(intent);
+                    if(mJobOrder.getState()==2){
+                        mJobOrder.setState(6);
+                        notifyItemChanged(position);
+                    }
                 }
             });
         } else if (holder instanceof FootViewHolder) {

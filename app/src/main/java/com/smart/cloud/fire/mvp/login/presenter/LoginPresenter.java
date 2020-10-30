@@ -49,18 +49,6 @@ public class LoginPresenter extends BasePresenter<LoginView> {
      */
     public void  loginYooSee(final String User, final String Pwd, final Context context, final int type) {
         this.context=context;//@@5.5
-        if(!NpcCommon.verifyNetwork(MyApp.app)){
-            UserInfo userinfo = LitePal.findFirst(UserInfo.class);
-            if(userinfo!=null){
-                if(User.equals(userinfo.getUserid())&& Pwd.equals(userinfo.getPsw())){
-                    login_success(userinfo.getUserid(),userinfo.getPsw(),userinfo.getPrivilege(),userinfo.getName());
-                    T.showShort(MyApp.app,"离线登陆成功");
-                }else {
-                    T.showShort(MyApp.app,"离线登陆失败");
-                }
-                return;
-            }
-        }
         String AppVersion = MyUtils.getBitProcessingVersion();
         MD5 md = new MD5();
         String password = md.getMD5ofStr(Pwd);
@@ -189,7 +177,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             public void onSuccess(LoginModel model) {
                 int errorCode = model.getErrorCode();
                 if(errorCode==0){
-                    login_success(userId,pwd,model.getPrivilege(),model.getName());
+                    login_success(userId,pwd,model.getPrivilege(),model.getPrivilege2(),model.getName());
                 }else if(errorCode==1){
                     mvpView.getDataFail("用户名或密码错误");
                 }else if(errorCode==2){
@@ -213,9 +201,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         }));
     }
 
-    private void login_success(String userId, String pwd, int privilege, String name) {
+    private void login_success(String userId, String pwd, int privilege, int privilege2, String name) {
         //获取到内部服务器的用户权限，并配置到MyAPP
         MyApp.app.setPrivilege(privilege);
+        MyApp.app.setPrivilege2(privilege2);
         SharedPreferencesManager.getInstance().putData(context,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTPASS,

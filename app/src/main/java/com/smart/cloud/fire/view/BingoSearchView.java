@@ -117,7 +117,9 @@ public class BingoSearchView extends FrameLayout{
                     }
                 }else{
                     img_cancel.setVisibility(GONE);
-                    popWnd.dismiss();
+                    if(popWnd!=null){
+                        popWnd.dismiss();
+                    }
                 }
             }
         });

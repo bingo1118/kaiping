@@ -1,9 +1,11 @@
 package com.smart.cloud.fire.activity.Inspection.UploadInspectionInfo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
@@ -428,13 +430,22 @@ public class UploadInspectionInfoActivity extends Activity {
                                             if(errorCode==0){
                                                 T.showShort(mContext,"记录上传成功");
                                                 clearView();
-                                                File ftemp=new File(pathParent);
-                                                if(ftemp.exists()){
-                                                    ftemp.delete();
+                                                if(pathParent!=null&&pathParent.length()>0){
+                                                    File ftemp=new File(pathParent);
+                                                    if(ftemp.exists()){
+                                                        ftemp.delete();
+                                                    }
                                                 }
                                                 if(f.exists()){
                                                     f.delete();
                                                 }//@@9.30
+                                                new AlertDialog.Builder(mContext).setMessage("成功,点击确定返回上一页")
+                                                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                finish();
+                                                            }
+                                                        }).create().show();
                                             }else{
                                                 T.showShort(mContext,error);
                                             }
@@ -539,8 +550,8 @@ public class UploadInspectionInfoActivity extends Activity {
                         e.printStackTrace();
                     }
                     listQ.get(nowIndex).getPhotos().add(new Photo(photonametemp,pathtemp));
-                    questionAdapter.notifyItemChanged(nowIndex);
-//                    questionAdapter.notifyDataSetChanged();
+//                    questionAdapter.notifyItemChanged(nowIndex);
+                    questionAdapter.notifyDataSetChanged();
                 }
                 break;
             case 102:

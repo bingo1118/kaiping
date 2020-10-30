@@ -27,21 +27,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/black"
-                android:text="您有一个新的工单，请查看！"/>
-            <TextView
                 android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
+                android:text="标题" />
+            <TextView
+                android:id="@+id/content_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="标题"/>
+                android:text="您有一个新的工单，请查看！"/>
         </LinearLayout>
 
     </LinearLayout>

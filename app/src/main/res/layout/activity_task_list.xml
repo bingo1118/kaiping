@@ -8,6 +8,7 @@
     android:id="@+id/select_line">
 
     <include layout="@layout/progress_bar"/>
+    <include layout="@layout/tasklist_popup"/>
 
     <RelativeLayout
         android:id="@+id/title_rela"

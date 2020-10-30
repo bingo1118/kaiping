@@ -139,7 +139,7 @@ public class AllDevInspFragment extends MvpFragment<AllSmokePresenter> implement
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
-        privilege = MyApp.app.getPrivilege();
+        privilege = MyApp.app.getPrivilege2();
         page = "1";
         list = new ArrayList<>();
 
@@ -252,13 +252,11 @@ public class AllDevInspFragment extends MvpFragment<AllSmokePresenter> implement
                 break;
             case R.id.commit_tv:
                 if(dev_type0.isChecked()){
-                    type="3";
-                }else if(dev_type1.isChecked()){
                     type="1";
+                }else if(dev_type1.isChecked()){
+                    type="3";
                 }else if(dev_type2.isChecked()){
                     type="4";
-                }else if(dev_type3.isChecked()){
-                    type="2";
                 }
                 if(dev_state0.isChecked()){
                     state="0";

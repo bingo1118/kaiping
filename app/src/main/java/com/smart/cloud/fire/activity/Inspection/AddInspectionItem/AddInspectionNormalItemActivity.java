@@ -222,6 +222,7 @@ public class AddInspectionNormalItemActivity extends MvpActivity<AddInspectionIt
 
         final String photo=System.currentTimeMillis()+"";
         String photo1="";
+        showLoading();
         if(select_photo_view.isPhotoExist()){
             photo1=photo;
             Observable.create(new Observable.OnSubscribe<String>() {

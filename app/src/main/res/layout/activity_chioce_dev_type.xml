@@ -107,7 +107,8 @@
                 android:orientation="vertical"
                 android:padding="20dp"
                 android:background="#fff"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:visibility="gone">
                 <ImageButton
                     android:id="@+id/spjk_btn"
                     android:layout_width="60dp"
@@ -170,7 +171,7 @@
                 android:padding="20dp"
                 android:background="#fff"
                 android:layout_margin="5dp"
-                >
+                android:visibility="gone">
                 <ImageButton
                     android:id="@+id/yongchuan_btn"
                     android:layout_width="60dp"

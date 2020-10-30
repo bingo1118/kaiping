@@ -131,20 +131,29 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
             }
         });
-        ((MyViewHolder) holder).remark_et.addTextChangedListener(new TextWatcher() {
+        ((MyViewHolder) holder).take_photo_view.setmOnLongClickListener(new TakePhotosView.OnLongClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onItemLongClick(Photo photo, int i) {
+                list.get(position).getPhotos().remove(i);
+                ((MyViewHolder) holder).take_photo_view.setmList(list.get(position).getPhotos(),isShowAdd);
             }
+        });
 
+        ((MyViewHolder) holder).mTxtWatcher.buildWatcher(position);
+
+
+        /**
+         * RecyclerView 在滑动的时候会使EditText失去焦点，这样可以触发OnFocusChangeListener，
+         * 这样可以更准确的绑定和解绑TxtWatcher
+         */
+        ((MyViewHolder) holder).remark_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                list.get(position).setRemark(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    ((MyViewHolder) holder).remark_et.addTextChangedListener(((MyViewHolder) holder).mTxtWatcher);
+                }else{
+                    ((MyViewHolder) holder).remark_et.removeTextChangedListener(((MyViewHolder) holder).mTxtWatcher);
+                }
             }
         });
     }
@@ -225,7 +234,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             QuestionItem questionItem=new QuestionItem();
             questionItem.setQid(q.getQid()+"");
             questionItem.setResult(q.getAnswer()+"");//合格
-            questionItem.setRemark(q.getRemark()+"");
+            questionItem.setRemark(q.getRemark()==null?"":q.getRemark()+"");
             List<Photo> photos = q.getPhotos();
             String photoString="";
             for(int i=0;i<photos.size();i++){
@@ -250,7 +259,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-    public static  class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         @Bind(R.id.quession_text)
         TextView quession_text;
@@ -269,9 +278,45 @@ public class QuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @Bind(R.id.line)
         LinearLayout line;
 
+        private TxtWatcher mTxtWatcher;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+
+            mTxtWatcher = new TxtWatcher();
+        }
+    }
+
+
+    /**
+     *  RecyclerView 在滑动的时候会使EditText失去焦点，这样可以触发OnFocusChangeListener，
+     *  这样可以更准确的绑定和解绑TxtWatcher。为什么要解绑TxtWatcher？
+     *  因为在RecyclerView刷新的时候会重复触发TextWatcher导致很多次无用的回调（甚至死循环）。
+     */
+    public class TxtWatcher implements TextWatcher{
+
+        private int mPosition;
+
+        public void buildWatcher(int position){
+            this.mPosition = position;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(s.length() > 0){
+                list.get(mPosition).setRemark(s.toString());
+            }
         }
     }
 }

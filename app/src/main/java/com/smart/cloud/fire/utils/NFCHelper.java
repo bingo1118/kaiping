@@ -163,6 +163,7 @@ public class NFCHelper{
                         T.showShort(mContext,"Formatted tag and wrote message");
                         return true;
                     } catch (IOException e) {
+                        e.printStackTrace();
                         T.showShort(mContext,"Failed to format tag.");
                         return false;
                     }

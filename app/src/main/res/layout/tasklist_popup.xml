@@ -5,6 +5,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/select_line"
         android:background="@color/white"
+        android:visibility="gone"
         android:layout_below="@id/title_rela">
 
         <TextView

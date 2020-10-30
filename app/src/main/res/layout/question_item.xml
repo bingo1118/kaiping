@@ -53,8 +53,16 @@
         <com.smart.cloud.fire.view.TakePhoto.TakePhotosView
             android:id="@+id/take_photo_view"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:textColor="@color/text_color_gray"
+            android:textStyle="italic"
+            android:textSize="12sp"
+            android:layout_marginBottom="5dp"
+            android:text="提示:长按删除图片"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

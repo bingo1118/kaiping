@@ -603,6 +603,7 @@ public class ShopSmokeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         }
                     });
                     break;
+                case 116:
                 case 51://创安
                     if (netStates == 0) {//设备不在线。。
                         ((ItemViewHolder) holder).smoke_name_text.setText("CA燃气："+normalSmoke.getName()+"（已离线)");

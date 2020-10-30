@@ -81,16 +81,25 @@ public class ItemsListFragment extends MvpFragment<ItemsListPresenter> implement
     String state="";//巡检状态  1/2/3 待巡检/不合格/合格
     String tid="";
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_items_list, container, false);
-        ButterKnife.bind(this, view);
+    public void onResume() {
+        super.onResume();
         mContext=getActivity();
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
         mPresenter.getAllItems(userID,state,tasktype);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_items_list, container, false);
+        ButterKnife.bind(this, view);
+//        mContext=getActivity();
+//        userID = SharedPreferencesManager.getInstance().getData(mContext,
+//                SharedPreferencesManager.SP_FILE_GWELL,
+//                SharedPreferencesManager.KEY_RECENTNAME);
+//        mPresenter.getAllItems(userID,state,tasktype);
 
         swipereFreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

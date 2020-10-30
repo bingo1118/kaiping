@@ -61,6 +61,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
     InspSettingFragment f5;
 
     Context mContext;
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,18 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
         setContentView(R.layout.activity_insp_main);
         ButterKnife.bind(this);
         mContext=this;
+
+        //不为null，说明是死而复活，移除已经存在的fragment,处理重影问题
+        if (savedInstanceState != null) {
+            transaction = getFragmentManager().beginTransaction();
+            transaction.remove(getFragmentManager().findFragmentByTag("F1"));
+            transaction.remove(getFragmentManager().findFragmentByTag("F2"));
+            transaction.remove(getFragmentManager().findFragmentByTag("F3"));
+            transaction.remove(getFragmentManager().findFragmentByTag("F4"));
+            transaction.remove(getFragmentManager().findFragmentByTag("f5"));
+            transaction.commitAllowingStateLoss();
+        }
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         regFilter();
@@ -97,13 +110,13 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction = getFragmentManager().beginTransaction();
             hideAllFragment(transaction);
             switch (item.getItemId()) {
                 case R.id.insp_main:
                     if(f1==null){
                         f1 = new ItemsListFragment();
-                        transaction.add(R.id.framePage,f1);
+                        transaction.add(R.id.framePage,f1,"F1");
                     }else{
                         transaction.show(f1);
                     }
@@ -111,7 +124,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
                 case R.id.insp_map:
                     if(f2==null){
                         f2 = new InspMapFragment();
-                        transaction.add(R.id.framePage,f2);
+                        transaction.add(R.id.framePage,f2,"F2");
                     }else{
                         transaction.show(f2);
                     }
@@ -119,7 +132,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
                 case R.id.insp_camera:
                     if(f3==null){
                         f3 = new CameraV4Fragment();
-                        transaction.add(R.id.framePage,f3);
+                        transaction.add(R.id.framePage,f3,"F3");
                     }else{
                         transaction.show(f3);
                     }
@@ -127,7 +140,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
                 case R.id.insp_fire:
                     if(f4==null){
                         f4 =new AllDevInspFragment();
-                        transaction.add(R.id.framePage,f4);
+                        transaction.add(R.id.framePage,f4,"F4");
                     }else{
                         transaction.show(f4);
                     }
@@ -135,7 +148,7 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
                 case R.id.insp_notice:
                     if(f5==null){
                         f5 =new InspSettingFragment();
-                        transaction.add(R.id.framePage,f5);
+                        transaction.add(R.id.framePage,f5,"F5");
                     }else{
                         transaction.show(f5);
                     }

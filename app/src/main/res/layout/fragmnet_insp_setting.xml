@@ -186,6 +186,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:padding="10dp"
+                android:visibility="gone"
                 android:background="@drawable/white_corner_shape">
                 <TextView
                     android:layout_width="wrap_content"

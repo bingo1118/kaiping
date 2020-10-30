@@ -163,7 +163,7 @@ public class CollectFragment extends MvpFragment<CollectFragmentPresenter> imple
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
-        privilege = MyApp.app.getPrivilege();
+        privilege = MyApp.app.getPrivilege2();
         page = "1";
         mvpPresenter.getAllAlarm(userID, privilege + "", page, 1, "", "", "", "","");
         init();

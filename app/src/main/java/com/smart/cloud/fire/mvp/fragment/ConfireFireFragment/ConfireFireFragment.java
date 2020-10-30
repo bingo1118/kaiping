@@ -177,7 +177,7 @@ public class ConfireFireFragment extends MvpFragment<ConfireFireFragmentPresente
         userID = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
-        privilege = MyApp.app.getPrivilege();
+        privilege = MyApp.app.getPrivilege2();
         init();
     }
 
