@@ -205,13 +205,13 @@ public class ItemsListFragment extends MvpFragment<ItemsListPresenter> implement
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.tasktype1_rb:
-                        tasktype_temp="1";
+                        tasktype_temp="0";
                         break;
                     case R.id.tasktype2_rb:
-                        tasktype_temp="2";
+                        tasktype_temp="1";
                         break;
                     case R.id.tasktype3_rb:
-                        tasktype_temp="3";
+                        tasktype_temp="2";
                         break;
                 }
             }

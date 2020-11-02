@@ -19,6 +19,16 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="筛选"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout

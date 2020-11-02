@@ -27,7 +27,7 @@ public class OrderNoticeActivity extends AppCompatActivity {
 
         title=getIntent().getStringExtra("title");
         notice=getIntent().getStringExtra("notice");
-        memo=getIntent().getStringExtra("memo");
+        memo=getIntent().getStringExtra("content");
         title_tv=(TextView)findViewById(R.id.title_tv) ;
         content_tv=(TextView)findViewById(R.id.content_tv) ;
         title_tv.setText(title);

@@ -280,7 +280,8 @@ public interface ApiStores {
     //查询用户工单列表
     @GET("getAllOrder")
     @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
-    Observable<HttpOrderListEntity> getAllOrder(@Query("userId") String userId, @Query("privilege") String privilege);
+    Observable<HttpOrderListEntity> getAllOrder(@Query("userId") String userId, @Query("privilege") String privilege
+            , @Query("state") String state);
 
     //查询用户工单详情
     @GET("getOrderDetail")

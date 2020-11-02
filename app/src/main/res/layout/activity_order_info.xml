@@ -99,7 +99,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="1dp"
             android:textColor="@color/white"
-            android:text="改派"
+            android:text="改/派单"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
 

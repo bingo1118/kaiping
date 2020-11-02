@@ -19,10 +19,10 @@ public class OrderListPresenter extends BasePresenter<OrderListEntity> {
         attachView(view);
     }
 
-    public void getAllDev(String userId) {
+    public void getAllDev(String userId,int state) {
         mvpView.showLoading();
         Observable mObservable;
-        mObservable = apiStores1.getAllOrder(userId, MyApp.getPrivilege()+"");
+        mObservable = apiStores1.getAllOrder(userId, MyApp.getPrivilege()+"",state+"");
 
         addSubscription(mObservable, new SubscriberCallBack<>(new ApiCallback<HttpOrderListEntity>() {
             @Override

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <RadioGroup
+        android:id="@+id/status_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/status1_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"/>
+        <RadioButton
+            android:id="@+id/status2_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未派单"/>
+        <RadioButton
+            android:id="@+id/status3_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未接单"/>
+        <RadioButton
+            android:id="@+id/status4_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="处理中"/>
+        <RadioButton
+            android:id="@+id/status5_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待复核"/>
+        <RadioButton
+            android:id="@+id/status6_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已上报"/>
+        <RadioButton
+            android:id="@+id/status7_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已处理"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/commit_btn"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:background="@color/blue"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue"/>
+
+</LinearLayout>

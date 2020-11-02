@@ -7,6 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.smart.cloud.fire.base.ui.MvpActivity;
 import com.smart.cloud.fire.global.MyApp;
@@ -32,6 +39,10 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
     RecyclerView recyclerView;
     @Bind(R.id.swipere_fresh_layout)
     SwipeRefreshLayout swipereFreshLayout;
+    @Bind(R.id.change)
+    TextView change;
+
+    int state=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +51,13 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
         ButterKnife.bind(this);
         mContext = this;
         refreshListView();
-        mPresenter.getAllDev(MyApp.getUserID());
+        mPresenter.getAllDev(MyApp.getUserID(),state);
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopWindow();
+            }
+        });
     }
 
     private void refreshListView() {
@@ -60,8 +77,8 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
         swipereFreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
-                mPresenter.getAllDev(MyApp.getUserID());
+                state=0;
+                mPresenter.getAllDev(MyApp.getUserID(),state);
             }
         });
     }
@@ -104,5 +121,81 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
     @Override
     public void getDataFail(String msg) {
 
+    }
+
+    private PopupWindow popupWindow = null;
+    int state_temp=0;
+    /**
+     * 打开下拉列表弹窗
+     */
+    public void showPopWindow() {
+        // 加载popupWindow的布局文件
+
+        String infServie = Context.LAYOUT_INFLATER_SERVICE;
+        LayoutInflater layoutInflater;
+        layoutInflater =  (LayoutInflater) mContext.getSystemService(infServie);
+        View contentView  = layoutInflater.inflate(R.layout.choose_order_condition, null,false);
+
+        RadioGroup radioGroup_status=(RadioGroup) contentView.findViewById(R.id.status_rg);
+        radioGroup_status.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.status1_rb:
+                        state_temp=0;
+                        break;
+                    case R.id.status2_rb:
+                        state_temp=1;
+                        break;
+                    case R.id.status3_rb:
+                        state_temp=2;
+                        break;
+                    case R.id.status4_rb:
+                        state_temp=6;
+                        break;
+                    case R.id.status5_rb:
+                        state_temp=3;
+                        break;
+                    case R.id.status6_rb:
+                        state_temp=5;
+                        break;
+                    case R.id.status7_rb:
+                        state_temp=4;
+                        break;
+                }
+            }
+        });
+
+
+        Button commit=(Button)contentView.findViewById(R.id.commit_btn);
+        commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                state=state_temp;
+                state_temp=0;
+                mPresenter.getAllDev(MyApp.getUserID(),state);
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT,true);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable( R.drawable.list_item_color_bg));
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                popupWindow=null;
+            }
+        });//@@12.20
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(true);
+//        backgroundAlpha(0.5f);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+//                backgroundAlpha(1f);
+                popupWindow = null;
+            }
+        });
+        popupWindow.showAsDropDown(change);
     }
 }
