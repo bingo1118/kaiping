@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/add_fire_title"
         android:layout_width="match_parent"
@@ -45,12 +47,59 @@
             android:layout_margin="5dp"/>
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/location_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_fire_title"
+        android:layout_margin="5dp"
+        android:textStyle="italic"
+        android:textColor="@color/blue"
+        android:text="当前位置:"/>
+
+    <RelativeLayout
+        android:id="@+id/take_photo_rela"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/location_tv">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="请先拍摄地点:"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/edit_view_bg">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/photo_image"
+                android:background="@drawable/add_nfc_recor"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_fire_title"
+        android:layout_margin="5dp"
+        android:textStyle="italic"
+        android:textColor="@color/blue"
+        android:text="提示:NFC标签点位巡检，请用手机扫码获取以下信息"/>
+
     <com.smart.cloud.fire.view.TakePhoto.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:background="@drawable/nfc_devinfo_shape"
-        android:layout_below="@id/add_fire_title">
+        android:layout_below="@id/take_photo_rela">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -318,31 +367,7 @@
                 </RelativeLayout>
 
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="拍照上传"/>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:background="@drawable/edit_view_bg">
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/photo_image"
-                        android:background="@drawable/add_nfc_recor"/>
-                </RelativeLayout>
 
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/add_fire_dev_btn"
@@ -385,4 +410,4 @@
 
     <include
         layout="@layout/progress_bar"/>
-</RelativeLayout>
+</LinearLayout>

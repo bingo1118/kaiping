@@ -133,16 +133,19 @@ public class OrderInfoActivity extends MvpActivity<OrderInfoPresenter> implement
         }else{
             commit_btn.setVisibility(View.GONE);
         }
-        if((state==6||state==1)&&privilege!=11){
+        if((state==6||state==1||state==2)&&privilege!=11){
             change_btn.setVisibility(View.VISIBLE);
         }else{
             change_btn.setVisibility(View.GONE);
         }
-        if((state==3&&privilege==13)||(state==6&&privilege==31)){
+        if((state==3&&privilege==13)||(state==5&&privilege==31)){
             cheak_btn.setVisibility(View.VISIBLE);
-            upload_btn.setVisibility(View.VISIBLE);
         }else{
             cheak_btn.setVisibility(View.GONE);
+        }
+        if((state==3&&privilege==13)){
+            upload_btn.setVisibility(View.VISIBLE);
+        }else{
             upload_btn.setVisibility(View.GONE);
         }
         if(state==3){

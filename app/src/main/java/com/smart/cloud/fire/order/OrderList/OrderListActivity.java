@@ -1,6 +1,7 @@
 package com.smart.cloud.fire.order.OrderList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.smart.cloud.fire.activity.Inspection.UploadInspectionInfo.UploadProblemActivity;
+import com.smart.cloud.fire.activity.Inspection.UploadMsg.UploadMsgActivity;
 import com.smart.cloud.fire.base.ui.MvpActivity;
 import com.smart.cloud.fire.global.MyApp;
 import com.smart.cloud.fire.order.JobOrder;
+import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
 
 import java.util.ArrayList;
@@ -41,8 +46,13 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
     SwipeRefreshLayout swipereFreshLayout;
     @Bind(R.id.change)
     TextView change;
+    @Bind(R.id.problem)
+    TextView problem;
+//    @Bind(R.id.mProgressBar)
+//    ProgressBar mProgressBar;
 
     int state=0;
+    String userid="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +61,22 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
         ButterKnife.bind(this);
         mContext = this;
         refreshListView();
-        mPresenter.getAllDev(MyApp.getUserID(),state);
+        userid= SharedPreferencesManager.getInstance().getData(MyApp.app,
+                SharedPreferencesManager.SP_FILE_GWELL,
+                SharedPreferencesManager.KEY_RECENTNAME);
+
+        mPresenter.getAllDev(userid,state);
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopWindow();
+            }
+        });
+        problem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, UploadProblemActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -78,7 +99,7 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
             @Override
             public void onRefresh() {
                 state=0;
-                mPresenter.getAllDev(MyApp.getUserID(),state);
+                mPresenter.getAllDev(userid,state);
             }
         });
     }
@@ -106,11 +127,13 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
     @Override
     public void showLoading() {
 
+//        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
 
+//        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -173,7 +196,7 @@ public class OrderListActivity extends MvpActivity<OrderListPresenter> implement
             public void onClick(View v) {
                 state=state_temp;
                 state_temp=0;
-                mPresenter.getAllDev(MyApp.getUserID(),state);
+                mPresenter.getAllDev(userid,state);
                 popupWindow.dismiss();
             }
         });

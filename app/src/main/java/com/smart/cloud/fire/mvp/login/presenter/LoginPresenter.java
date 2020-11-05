@@ -221,6 +221,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         SharedPreferencesManager.getInstance().putIntData(context,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENT_PRIVILEGE, privilege);
+        MyApp.app.setPrivilege(privilege);
+        MyApp.app.setPrivilege2(privilege2);
         //跳转到主界面
         mvpView.getDataSuccess();
         SQLiteDatabase db = LitePal.getDatabase();

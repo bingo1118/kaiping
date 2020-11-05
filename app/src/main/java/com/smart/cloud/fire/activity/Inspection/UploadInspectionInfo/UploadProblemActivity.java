@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -33,6 +34,8 @@ import rx.schedulers.Schedulers;
 public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> implements UploadProblemView {
 
 
+    @Bind(R.id.mProgressBar)
+    ProgressBar mProgressBar;
     @Bind(R.id.add_fire_name)
     EditText addFireName;
     @Bind(R.id.add_fire_address)
@@ -80,6 +83,7 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
                         T.showShort(mContext,"请先选择区域");
                         return;
                     }
+
                     mvpPresenter.getManagers(addFireZjq.getSelecedId());
 //                    add_fire_point.setClickable(false);
 //                    add_fire_point.showLoading();
@@ -145,12 +149,12 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
 
     @Override
     public void showLoading() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
 
@@ -235,6 +239,7 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
 
         final String photo=System.currentTimeMillis()+"";
         String photo1="";
+        showLoading();
         if(select_photo_view.isPhotoExist()){
             photo1=photo;
             Observable.create(new Observable.OnSubscribe<String>() {
@@ -268,7 +273,7 @@ public class UploadProblemActivity extends MvpActivity<UploadProblemPresenter> i
             mvpPresenter.uploadHiddenDanger(smokeName,address,managerId,userID,areaId,memo,photo);
         }
 
-
+        hideLoading();
     }
 
 }

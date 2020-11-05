@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -41,6 +42,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.google.gson.JsonObject;
 import com.smart.cloud.fire.activity.UploadNFCInfo.FileUtil;
 import com.smart.cloud.fire.activity.UploadNFCInfo.FormFile;
@@ -49,8 +52,11 @@ import com.smart.cloud.fire.adapter.QuestionAdapter;
 import com.smart.cloud.fire.global.ConstantValues;
 import com.smart.cloud.fire.global.MyApp;
 import com.smart.cloud.fire.global.Question;
+import com.smart.cloud.fire.service.LocationService;
+import com.smart.cloud.fire.utils.ImageUtils;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
+import com.smart.cloud.fire.utils.TimeFormat;
 import com.smart.cloud.fire.utils.UploadUtil;
 import com.smart.cloud.fire.utils.VolleyHelper;
 import com.smart.cloud.fire.view.TakePhoto.Photo;
@@ -76,6 +82,8 @@ import fire.cloud.smart.com.smartcloudfire.R;
 
 public class UploadInspectionInfoActivity extends Activity {
 
+    @Bind(R.id.location_tv)
+    TextView location_tv;//@@uid
     @Bind(R.id.uid_name)
     EditText uid_name;//@@uid
     @Bind(R.id.add_fire_name)
@@ -384,8 +392,6 @@ public class UploadInspectionInfoActivity extends Activity {
 //                        RequestQueue mQueue = Volley.newRequestQueue(mContext);
                         String url="";
                         if(isHavePhoto&&isSuccess){
-                            File file = new File(imageFilePath);//9.29
-                            file.delete();//@@9.29
                             if(modify!=null&&modify.length()>0){
                                 //"cheakImg"图片路径
                                 url= ConstantValues.SERVER_IP_NEW+"updateResult?tuid="+tuid+"&uid="+uid_name.getText().toString()
@@ -556,12 +562,12 @@ public class UploadInspectionInfoActivity extends Activity {
                 break;
             case 102:
                 if (resultCode == Activity.RESULT_OK) {
-                    Bitmap bmp = BitmapFactory.decodeFile(imageFilePath);
                     try {
-                        saveFile(compressBySize(Environment.getExternalStorageDirectory().getAbsolutePath()+"/devimage.jpg",1500,2000),Environment.getExternalStorageDirectory().getAbsolutePath()+"/devimage.jpg");
+                        saveFile(compressBySize(imageFilePath,1500,2000),imageFilePath);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    Bitmap bmp = BitmapFactory.decodeFile(imageFilePath);
                     DisplayMetrics dm = new DisplayMetrics();
                     getWindowManager().getDefaultDisplay().getMetrics(dm);
                     int screenWidth=dm.widthPixels;
@@ -626,7 +632,9 @@ public class UploadInspectionInfoActivity extends Activity {
         }//设置好缩放比例后，加载图片进内容；
         opts.inJustDecodeBounds = false;
         bitmap = BitmapFactory.decodeFile(pathName, opts);
-        return bitmap;
+        Bitmap textBitmap = ImageUtils.drawTextToRightBottom(this, bitmap, "位置:"+"\r\n"+address, 18, Color.RED, 25, 45);
+        textBitmap= ImageUtils.drawTextToRightBottom(this, textBitmap, "时间:"+"\r\n"+TimeFormat.getNowTime(), 18, Color.RED, 25, 25);
+        return textBitmap;
     }
 
     //@@10.12存储文件到sd卡
@@ -873,6 +881,35 @@ public class UploadInspectionInfoActivity extends Activity {
         });
     }
 
+
+    private String address="";
+    private LocationService locationService;
+    private BDLocationListener mListener = new BDLocationListener() {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // TODO Auto-generated method stub
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                address=location.getAddrStr();
+                location_tv.setText("当前位置:"+address);
+                locationService.stop();
+            }
+        }
+    };
+    @Override
+    protected void onStart() {
+        super.onStart();
+        locationService = MyApp.app.locationService;
+        locationService.registerListener(mListener);
+        locationService.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        locationService.unregisterListener(mListener); //注销掉监听
+        locationService.stop(); //停止定位服务
+    }
 
 
 }

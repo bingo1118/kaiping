@@ -76,7 +76,7 @@ public class ChangeDealerActivity extends Activity {
         }else{
             url = ConstantValues.SERVER_IP_NEW + "updateSendUser?jkey=" + order.getJkey()
                     + "&repDealUserId=" + userid
-                    + "&repDealUserId=" + userid
+                    + "&nowUserId=" + userid
                     + "&ifCheck=" + state
                     + "&loginUserId=" + MyApp.getUserID();
         }

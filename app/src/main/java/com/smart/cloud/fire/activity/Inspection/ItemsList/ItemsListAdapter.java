@@ -68,6 +68,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((ItemViewHolder) holder).state_tv.setVisibility(View.VISIBLE);
         switch (mPoint.getStatus()){
             case "0":
+                ((ItemViewHolder) holder).turn_to_insp.setVisibility(View.GONE);
                 switch (mPoint.getDevicestate()){
                     case 0:
                         state="无任务";
