@@ -98,7 +98,7 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
                 if(tid!=null&&tid.length()>0){
                     mPresenter.getTaskItemsByName(tid,state);
                 }else{
-                    mPresenter.getItemsByName(pid,text);
+                    mPresenter.getItemsByName(userID,pid,text);
                 }
             }
         });

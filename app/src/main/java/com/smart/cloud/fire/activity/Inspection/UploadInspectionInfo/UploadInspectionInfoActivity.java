@@ -29,6 +29,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -55,6 +56,7 @@ import com.smart.cloud.fire.global.Question;
 import com.smart.cloud.fire.service.LocationService;
 import com.smart.cloud.fire.utils.ImageUtils;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
+import com.smart.cloud.fire.utils.SignView.SignatureActivity;
 import com.smart.cloud.fire.utils.T;
 import com.smart.cloud.fire.utils.TimeFormat;
 import com.smart.cloud.fire.utils.UploadUtil;
@@ -82,6 +84,8 @@ import fire.cloud.smart.com.smartcloudfire.R;
 
 public class UploadInspectionInfoActivity extends Activity {
 
+    @Bind(R.id.sign_cb)
+    CheckBox sign_cb;
     @Bind(R.id.location_tv)
     TextView location_tv;//@@uid
     @Bind(R.id.uid_name)
@@ -328,7 +332,15 @@ public class UploadInspectionInfoActivity extends Activity {
         }
     }
 
+    private String signName="";
+
     private void initView() {
+        sign_cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(mContext, SignatureActivity.class), 166);
+            }
+        });
         memo_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -371,6 +383,24 @@ public class UploadInspectionInfoActivity extends Activity {
                     public void run() {
                         boolean isSuccess=false;
                         boolean isHavePhoto=false;
+                        if(!sign_cb.isChecked()){
+                            T.showShort(mContext,"请先完成数字签名");
+                            dismissProgressBarOnUiThread();
+                            return;
+                        }else{
+                            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "signature.jpg");
+                            if(file.exists()){
+                                signName=System.currentTimeMillis()+"";
+                                if(UploadUtil.uploadFile(file,userID,areaId,signName,"","cheakImg")){
+                                    T.showShort(mContext,"数字签名上传完成");
+                                }else{
+                                    T.showShort(mContext,"数字签名上传失败");
+                                    dismissProgressBarOnUiThread();
+                                    return;
+                                }
+                            }//@@11.07
+
+                        }
                         if(imageFilePath!=null){
                             File file = new File(imageFilePath); //这里的path就是那个地址的全局变量
                             uploadTime=System.currentTimeMillis()+"";
@@ -401,7 +431,8 @@ public class UploadInspectionInfoActivity extends Activity {
                                 url= ConstantValues.SERVER_IP_NEW+"postResult?workerId="+userID+"&uid="+uid_name.getText().toString()
                                         +"&tid="+tid+"&pid="+pid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
                                         +"&imgs="+uploadTime+imageFilePath.substring(imageFilePath.lastIndexOf("."))
-                                        +"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype;
+                                        +"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype
+                                        +"&signature="+signName+".jpg";
 
                             }
 
@@ -421,7 +452,8 @@ public class UploadInspectionInfoActivity extends Activity {
                             }else{
                                 url= ConstantValues.SERVER_IP_NEW+"postResult?workerId="+userID+"&uid="+uid_name.getText().toString()
                                         +"&tid="+tid+"&pid="+pid+"&qualified="+deviceState+"&desc="+ URLEncoder.encode(memo_name.getText().toString())
-                                        +"&imgs="+"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype;;
+                                        +"&imgs="+"&questionJson="+URLEncoder.encode(finalAnswer)+"&startdate="+startdate+"&enddate="+enddate+"&taskType="+tasktype
+                                        +"&signature="+signName+".jpg";
                             }
 
                         }
@@ -547,7 +579,14 @@ public class UploadInspectionInfoActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 147:
+            case 166://签名
+                if(resultCode==1){
+                    sign_cb.setChecked(true);
+                }else{
+                    sign_cb.setChecked(false);
+                }
+                break;
+            case 147://细则图片
                 if (resultCode == Activity.RESULT_OK) {
                     Bitmap bmp = BitmapFactory.decodeFile(pathtemp);
                     try {
@@ -560,7 +599,7 @@ public class UploadInspectionInfoActivity extends Activity {
                     questionAdapter.notifyDataSetChanged();
                 }
                 break;
-            case 102:
+            case 102://环境图片
                 if (resultCode == Activity.RESULT_OK) {
                     try {
                         saveFile(compressBySize(imageFilePath,1500,2000),imageFilePath);

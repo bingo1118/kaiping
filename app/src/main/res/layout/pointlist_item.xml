@@ -51,10 +51,21 @@
         android:textSize="14sp"
         android:layout_alignLeft="@id/area_tv"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
         android:layout_below="@id/area_tv"
         android:textColor="@color/dialog_back_color"
         android:text="地址:"/>
+
+    <TextView
+        android:id="@+id/level_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_alignLeft="@id/area_tv"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/address_tv"
+        android:textColor="@color/dialog_back_color"
+        android:text="级别:"/>
 
 
 

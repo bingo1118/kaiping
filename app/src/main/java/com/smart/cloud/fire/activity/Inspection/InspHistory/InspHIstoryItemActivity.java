@@ -10,12 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
+import com.smart.cloud.fire.activity.NFCDev.NFCImageShowActivity;
 import com.smart.cloud.fire.global.ConstantValues;
 import com.smart.cloud.fire.global.Question;
 import com.smart.cloud.fire.utils.T;
@@ -48,6 +52,12 @@ public class InspHIstoryItemActivity extends Activity {
     TextView time_tv;
     @Bind(R.id.state)
     TextView state_tv;
+    @Bind(R.id.memo_tv)
+    TextView memo_tv;
+    @Bind(R.id.location_photo_iv)
+    ImageView location_photo_iv;
+    @Bind(R.id.sign_photo_iv)
+    ImageView sign_photo_iv;
 
     private Context mContext;
     private String uid;
@@ -89,6 +99,37 @@ public class InspHIstoryItemActivity extends Activity {
                             address_tv.setText("位置:"+response.getString("address"));
                             time_tv.setText("时间:"+response.getString("addTime"));
                             state_tv.setText("总评:"+response.getString("deviceStateName"));
+                            memo_tv.setText("备注:"+response.getString("memo"));
+
+                            String location_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getString("photo1");
+                            String sign_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getString("signature");
+
+                            Glide.with(mContext)
+                                    .load(location_img_path)
+                                    .placeholder(R.drawable.photo_ok)
+                                    .into(location_photo_iv);
+                            location_photo_iv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                        Intent intent = new Intent(mContext, NFCImageShowActivity.class);
+                                        intent.putExtra("path",location_img_path);
+                                        mContext.startActivity(intent);
+                                }
+                            });
+
+                            Glide.with(mContext)
+                                    .load(sign_img_path)
+                                    .placeholder(R.drawable.photo_ok)
+                                    .into(sign_photo_iv);
+                            sign_photo_iv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(mContext, NFCImageShowActivity.class);
+                                    intent.putExtra("path",sign_img_path);
+                                    mContext.startActivity(intent);
+                                }
+                            });
+
                             dealwithQuestionJson(questionJson);
 
                         } catch (JSONException e) {

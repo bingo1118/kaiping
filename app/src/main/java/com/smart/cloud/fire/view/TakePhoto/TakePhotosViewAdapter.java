@@ -80,7 +80,7 @@ public class TakePhotosViewAdapter extends RecyclerView.Adapter<TakePhotosViewAd
             final Photo photo = mList.get(position);
             Glide.with(mContext)
                     .load(photo.getPath())
-                    .placeholder(R.drawable.photo_place)
+                    .placeholder(R.drawable.photo_ok)
                     .into(holder.photo_iv);
             holder.photo_iv.setOnClickListener(new View.OnClickListener() {
                 @Override

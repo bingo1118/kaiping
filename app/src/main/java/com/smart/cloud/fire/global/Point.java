@@ -11,6 +11,24 @@ public class Point implements BingoViewModel{
 	private String status;
 	private String areaid;
 	private String areaName;
+	private int protectionLevel;//保护级别 0市保1省保2国保
+	private String protectionLevelName;//保护级别名称
+
+	public int getProtectionLevel() {
+		return protectionLevel;
+	}
+
+	public void setProtectionLevel(int protectionLevel) {
+		this.protectionLevel = protectionLevel;
+	}
+
+	public String getProtectionLevelName() {
+		return protectionLevelName;
+	}
+
+	public void setProtectionLevelName(String protectionLevelName) {
+		this.protectionLevelName = protectionLevelName;
+	}
 
 	public String getPid() {
 		return pid;

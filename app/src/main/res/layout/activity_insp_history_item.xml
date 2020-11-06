@@ -75,6 +75,52 @@
             android:textStyle="bold"
             android:text="时间:"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="位置图片:" />
+
+            <ImageView
+                android:id="@+id/location_photo_iv"
+                android:scaleType="fitXY"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="签名图片:" />
+
+            <ImageView
+                android:id="@+id/sign_photo_iv"
+                android:scaleType="fitXY"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/memo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="备注:"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/question_recyclerview"
             android:layout_width="match_parent"

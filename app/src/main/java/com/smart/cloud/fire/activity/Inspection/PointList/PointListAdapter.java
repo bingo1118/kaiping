@@ -57,6 +57,7 @@ public class PointListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((ItemViewHolder) holder).name_tv.setText(mPoint.getName());
         ((ItemViewHolder) holder).area_tv.setText("区域:"+mPoint.getAreaName());
         ((ItemViewHolder) holder).address_tv.setText("地址:"+mPoint.getAddress());
+        ((ItemViewHolder) holder).level_tv.setText("级别:"+mPoint.getProtectionLevelName());
         holder.itemView.setTag(mPoint);
     }
 
@@ -82,6 +83,8 @@ public class PointListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView area_tv;
         @Bind(R.id.address_tv)
         TextView address_tv;
+        @Bind(R.id.level_tv)
+        TextView level_tv;
 
 
         public ItemViewHolder(View view) {

@@ -103,8 +103,8 @@ public class ItemsListPresenter extends BasePresenter<ItemsListView>{
         }));
     }
 
-    public void getItemsByName(String pid,String text){
-        Observable mObservable=apiStores1.getItemsByName(pid,text);
+    public void getItemsByName(String userid,String pid,String text){
+        Observable mObservable=apiStores1.getItemsByName(userid,pid,text);
         addSubscription(mObservable,new SubscriberCallBack<>(new ApiCallback<HttpError>() {
             @Override
             public void onSuccess(HttpError model) {

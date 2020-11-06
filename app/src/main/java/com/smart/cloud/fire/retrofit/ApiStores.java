@@ -157,7 +157,7 @@ public interface ApiStores {
     //获取查找的巡检点类型
     @GET("getItemsByName")
     @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
-    Observable<HttpError> getItemsByName(@Query("pid") String pid, @Query("deviceName") String areaId);
+    Observable<HttpError> getItemsByName(@Query("userId") String userId,@Query("pid") String pid, @Query("deviceName") String areaId);
 
     //获取查找任务中的巡检点类型
     @GET("getItemsByName2")

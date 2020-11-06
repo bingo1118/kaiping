@@ -372,6 +372,7 @@
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.DealAsset.AssetInfoActivity" />
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.Tag.TagListActivity" />
         <activity android:name="com.smart.cloud.fire.activity.AssetManage.AssetByCkey.BindTagActivity" />
+        <activity android:name="com.smart.cloud.fire.utils.SignView.SignatureActivity" />
         <activity android:name="com.smart.cloud.fire.activity.Inspection.InspHistory.InspHIstoryItemActivity"></activity>
     </application>
 
