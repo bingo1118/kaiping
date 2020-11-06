@@ -52,6 +52,8 @@ public class InspHIstoryItemActivity extends Activity {
     TextView time_tv;
     @Bind(R.id.state)
     TextView state_tv;
+    @Bind(R.id.worker_tv)
+    TextView worker_tv;
     @Bind(R.id.memo_tv)
     TextView memo_tv;
     @Bind(R.id.location_photo_iv)
@@ -97,12 +99,13 @@ public class InspHIstoryItemActivity extends Activity {
                             String questionJson=response.getString("questionTypes");
                             name_tv.setText("名称:"+response.getString("deviceName"));
                             address_tv.setText("位置:"+response.getString("address"));
-                            time_tv.setText("时间:"+response.getString("addTime"));
+                            time_tv.setText("时间:"+response.getJSONObject("record").getString("checktime"));
                             state_tv.setText("总评:"+response.getString("deviceStateName"));
                             memo_tv.setText("备注:"+response.getString("memo"));
+                            worker_tv.setText("巡检人:"+response.getJSONObject("record").getString("workerName"));
 
-                            String location_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getString("photo1");
-                            String sign_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getString("signature");
+                            String location_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getJSONObject("record").getString("imgs");
+                            String sign_img_path=ConstantValues.NFC_IMAGES+"cheakImg//"+response.getJSONObject("record").getString("signature");
 
                             Glide.with(mContext)
                                     .load(location_img_path)

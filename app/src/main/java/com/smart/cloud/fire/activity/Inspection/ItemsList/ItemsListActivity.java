@@ -42,6 +42,8 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
     TextView progress_tv;
     @Bind(R.id.change)
     TextView change;
+    @Bind(R.id.order_tv)
+    TextView order_tv;
     @Bind(R.id.search_bingo)
     BingoSearchView search_bingo;
 
@@ -102,6 +104,7 @@ public class ItemsListActivity extends MvpActivity<ItemsListPresenter> implement
                 }
             }
         });
+        order_tv.setVisibility(View.GONE);
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.smart.cloud.fire.activity.Inspection.InspectionMap.InspectionMapActiv
 import com.smart.cloud.fire.activity.Inspection.ItemsList.ItemsListActivity;
 import com.smart.cloud.fire.activity.Inspection.TaskList.TaskListActivity;
 import com.smart.cloud.fire.base.ui.MvpActivity;
+import com.smart.cloud.fire.global.MyApp;
 import com.smart.cloud.fire.global.Point;
 import com.smart.cloud.fire.utils.SharedPreferencesManager;
 import com.smart.cloud.fire.utils.T;
@@ -98,12 +99,20 @@ public class PointListActivity extends MvpActivity<PointListPresenter> implement
                 Intent intent;
                 switch (item.getItemId()) {
                     case R.id.add_nfc:
-                        intent=new Intent(PointListActivity.this, AddInspectionNFCItemActivity.class);
-                        startActivity(intent);
+                        if(MyApp.getPrivilege()==11){
+                            T.showShort(mContext,"该账号无此权限");
+                        }else{
+                            intent=new Intent(PointListActivity.this, AddInspectionNFCItemActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.add_dev:
-                        intent=new Intent(PointListActivity.this, AddInspectionNormalItemActivity.class);
-                        startActivity(intent);
+                        if(MyApp.getPrivilege()==11){
+                            T.showShort(mContext,"该账号无此权限");
+                        }else{
+                            intent=new Intent(PointListActivity.this, AddInspectionNormalItemActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.all_items:
                         intent=new Intent(PointListActivity.this, ItemsListActivity.class);

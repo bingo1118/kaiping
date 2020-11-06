@@ -117,10 +117,18 @@ public class InspSettingFragment extends Fragment {
                 intent = new Intent(mContext, MyZoomActivity.class);
                 break;
             case R.id.insp_add_normal_ib:
-                intent=new Intent(mContext, AddInspectionNormalItemActivity.class);
+                if(MyApp.getPrivilege()==11){
+                    T.showShort(mContext,"该账号不具备该权限");
+                }else{
+                    intent=new Intent(mContext, AddInspectionNormalItemActivity.class);
+                }
                 break;
             case R.id.insp_add_nfc_ib:
-                intent=new Intent(mContext, AddInspectionNFCItemActivity.class);
+                if(MyApp.getPrivilege()==11){
+                    T.showShort(mContext,"该账号不具备该权限");
+                }else{
+                    intent=new Intent(mContext, AddInspectionNFCItemActivity.class);
+                }
                 break;
             case R.id.insp_points_ib:
                 intent=new Intent(mContext, PointListActivity.class);
@@ -132,7 +140,11 @@ public class InspSettingFragment extends Fragment {
                 intent=new Intent(mContext, NoticeListActivity.class);
                 break;
             case R.id.insp_add_fire_ib:
-                intent = new Intent(mContext, ChioceDevTypeActivity.class);
+                if(MyApp.getPrivilege()==11){
+                    T.showShort(mContext,"该账号不具备该权限");
+                }else{
+                    intent = new Intent(mContext, ChioceDevTypeActivity.class);
+                }
                 break;
             case R.id.insp_upload_msg_ib:
                 intent = new Intent(mContext, UploadMsgActivity.class);

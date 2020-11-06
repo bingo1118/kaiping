@@ -30,6 +30,10 @@ public class OrderListPresenter extends BasePresenter<OrderListEntity> {
                 int result = model.getErrorCode();
                 if (result == 0) {
                     List<JobOrder> smokeList = model.getList();
+                    if(smokeList==null){
+                        smokeList = new ArrayList<>();
+                        mvpView.getDataFail("无数据");
+                    }
                     mvpView.getDataSuccess(smokeList);
                 } else {
                     List<JobOrder> mSmokeList = new ArrayList<>();
