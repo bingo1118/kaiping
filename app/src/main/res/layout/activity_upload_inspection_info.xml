@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/add_fire_title"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/inspection_back"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/add_fire_back_btn"
             android:layout_width="65dp"
             android:layout_height="45dp"
-            android:layout_alignParentLeft="true"
-            >
+            android:layout_alignParentLeft="true">
+
             <ImageView
                 android:id="@+id/memo"
                 android:layout_width="10dp"
                 android:layout_height="16.5dp"
                 android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:src="@drawable/selector_back"/>
+                android:src="@drawable/selector_back"
+                android:visibility="gone" />
         </RelativeLayout>
-
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="#ffffff"
             android:text="上传设备信息"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -41,10 +40,10 @@
             android:id="@+id/memo_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/memo_insp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:src="@drawable/memo_insp" />
     </RelativeLayout>
 
     <TextView
@@ -53,59 +52,64 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/add_fire_title"
         android:layout_margin="5dp"
-        android:textStyle="italic"
+        android:text="当前位置:"
         android:textColor="@color/blue"
-        android:text="当前位置:"/>
+        android:textStyle="italic" />
 
     <RelativeLayout
         android:id="@+id/take_photo_rela"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/location_tv"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/location_tv">
+        android:layout_marginTop="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="请先拍摄地点:"/>
+            android:text="请先拍摄地点:" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:background="@drawable/edit_view_bg">
+
             <ImageView
+                android:id="@+id/photo_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/photo_image"
-                android:background="@drawable/add_nfc_recor"/>
+                android:background="@drawable/add_nfc_recor" />
         </RelativeLayout>
 
     </RelativeLayout>
 
 
     <TextView
+        android:id="@+id/tip_1_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_fire_title"
+        android:layout_below="@id/take_photo_rela"
         android:layout_margin="5dp"
-        android:textStyle="italic"
+        android:text="提示:NFC标签点位巡检，请用手机扫码获取以下信息"
         android:textColor="@color/blue"
-        android:text="提示:NFC标签点位巡检，请用手机扫码获取以下信息"/>
+        android:textStyle="italic" />
 
     <com.smart.cloud.fire.view.TakePhoto.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/tip_1_tv"
         android:layout_margin="10dp"
-        android:background="@drawable/nfc_devinfo_shape"
-        android:layout_below="@id/take_photo_rela">
+        android:background="@drawable/nfc_devinfo_shape">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -113,72 +117,75 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:id="@+id/camera_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="UID"/>
+                    android:text="UID" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/uid_name"
-                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@null"
+                        android:enabled="false"
                         android:hint="UID"
-                        android:textColorHint="@color/hint_color_text"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:id="@+id/camera_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="名称"/>
+                    android:text="名称" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/add_fire_name"
-                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@null"
+                        android:enabled="false"
                         android:hint="名称"
-                        android:textColorHint="@color/hint_color_text"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
             </RelativeLayout>
-
-
 
 
             <RelativeLayout
@@ -187,101 +194,109 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="地址"/>
+                    android:text="地址" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/add_fire_address"
-                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="5dp"
+                        android:layout_centerVertical="true"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:enabled="false"
                         android:hint="@string/add_fire_address"
-                        android:textColorHint="@color/hint_color_text"
+                        android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
                         android:singleLine="false"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="区域"/>
+                    android:text="区域" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/area_name"
-                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@null"
+                        android:enabled="false"
                         android:hint="区域"
-                        android:textColorHint="@color/hint_color_text"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="类型"/>
+                    android:text="类型" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/device_type_name"
-                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@null"
+                        android:enabled="false"
                         android:hint="类型"
-                        android:textColorHint="@color/hint_color_text"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -302,33 +317,38 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="状态"/>
+                    android:text="状态" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp">
+
                     <RadioGroup
                         android:id="@+id/radio_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/radio1"
-                            android:checked="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="合格"/>
+                            android:checked="true"
+                            android:text="合格" />
+
                         <RadioButton
                             android:id="@+id/radio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="30dp"
-                            android:text="不合格"/>
+                            android:text="不合格" />
                     </RadioGroup>
                 </RelativeLayout>
             </RelativeLayout>
@@ -339,31 +359,33 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="备注"/>
+                    android:text="备注" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:background="@drawable/edit_view_bg">
+
                     <EditText
                         android:id="@+id/memo_name"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:gravity="start"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@null"
+                        android:gravity="start"
                         android:hint="备注"
-                        android:textColorHint="@color/hint_color_text"
                         android:textColor="@color/text_view_and_kuang"
-                        />
+                        android:textColorHint="@color/hint_color_text"
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -375,27 +397,27 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/blue"
-                android:text="数字签名"/>
+                android:text="数字签名"
+                android:textColor="@color/blue" />
 
 
             <RelativeLayout
                 android:id="@+id/add_fire_dev_btn"
                 android:layout_width="150dp"
                 android:layout_height="45dp"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="15dp"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
+                android:layout_margin="15dp"
                 android:background="@drawable/login_button_selector">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:text="上传"
                     android:textColor="#ffffff"
-                    android:textSize="16sp"
-                    android:layout_centerInParent="true"
-                    />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <TextView
@@ -408,16 +430,14 @@
         android:id="@+id/memo_tv"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/add_fire_title"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/add_fire_title"
         android:background="@color/white"
         android:padding="10dp"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:visibility="gone"/>
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
-
-    <include
-        layout="@layout/progress_bar"/>
-</LinearLayout>
+    <include layout="@layout/progress_bar" />
+</RelativeLayout>

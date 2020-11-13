@@ -574,6 +574,15 @@ public interface ApiStores {
                                         @Field("makeAddress") String makeAddress,@Field("pid") String pid,
                                         @Field("photo1") String photo1);
 
+    //添加巡检项目
+    @FormUrlEncoded
+    @POST("addPoint")
+    @Headers("Content-Type: application/x-www-form-urlencoded;charset=utf-8")
+    Observable<ConfireFireModel> addPoint(@Field("areaId") String areaId, @Field("name") String name,
+                                            @Field("address") String address, @Field("longitude") String longitude,
+                                            @Field("latitude") String latitude,
+                                            @Field("protectionLevel") String protectionLevel);
+
     //修改巡检项目
     @FormUrlEncoded
     @POST("updateItemInfo")

@@ -1,5 +1,6 @@
 package com.smart.cloud.fire.order.OrderNotice;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import com.smart.cloud.fire.order.OrderList.OrderListActivity;
 
 import fire.cloud.smart.com.smartcloudfire.R;
 
-public class OrderNoticeActivity extends AppCompatActivity {
+public class OrderNoticeActivity extends Activity {
 
     TextView tv;
     TextView title_tv,content_tv;

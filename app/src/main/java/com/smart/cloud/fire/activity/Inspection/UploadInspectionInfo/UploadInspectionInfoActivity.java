@@ -392,9 +392,9 @@ public class UploadInspectionInfoActivity extends Activity {
                             if(file.exists()){
                                 signName=System.currentTimeMillis()+"";
                                 if(UploadUtil.uploadFile(file,userID,areaId,signName,"","cheakImg")){
-                                    T.showShort(mContext,"数字签名上传完成");
+                                    ToastOnUiThread("数字签名上传成功");
                                 }else{
-                                    T.showShort(mContext,"数字签名上传失败");
+                                    ToastOnUiThread("数字签名上传失败");
                                     dismissProgressBarOnUiThread();
                                     return;
                                 }
@@ -413,8 +413,8 @@ public class UploadInspectionInfoActivity extends Activity {
                             for(Photo p:q.getPhotos()){
                                 File file = new File(p.getPath());
                                 if(!UploadUtil.uploadFile(file,userID,areaId,p.getName(),"","cheakImg")){
-                                    T.showShort(mContext,"图片上传失败，请重试");
-                                }
+                                    ToastOnUiThread("图片上传失败，请重试");
+                            }
                             }
                         }
                         VolleyHelper helper=VolleyHelper.getInstance(mContext);
@@ -438,12 +438,7 @@ public class UploadInspectionInfoActivity extends Activity {
 
                         }else{
                             if(isHavePhoto&&!isSuccess){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        T.showShort(mContext,"图片上传失败");
-                                    }
-                                });
+                                ToastOnUiThread("图片上传失败");
                             }
                             if(modify!=null&&modify.length()>0){
                                 url= ConstantValues.SERVER_IP_NEW+"updateResult?tuid="+tuid+"&uid="+uid_name.getText().toString()
@@ -466,7 +461,7 @@ public class UploadInspectionInfoActivity extends Activity {
                                             int errorCode=response.getInt("errorCode");
                                             String error=response.getString("error");
                                             if(errorCode==0){
-                                                T.showShort(mContext,"记录上传成功");
+                                                ToastOnUiThread("记录上传成功");
                                                 clearView();
                                                 if(pathParent!=null&&pathParent.length()>0){
                                                     File ftemp=new File(pathParent);
@@ -485,7 +480,7 @@ public class UploadInspectionInfoActivity extends Activity {
                                                             }
                                                         }).create().show();
                                             }else{
-                                                T.showShort(mContext,error);
+                                                ToastOnUiThread(error);
                                             }
                                             dismissProgressBarOnUiThread();
                                         } catch (JSONException e) {
@@ -496,7 +491,7 @@ public class UploadInspectionInfoActivity extends Activity {
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                T.showShort(mContext,"网络错误");
+                                ToastOnUiThread("网络错误");
                                 dismissProgressBarOnUiThread();
                             }
                         });
@@ -916,6 +911,15 @@ public class UploadInspectionInfoActivity extends Activity {
             @Override
             public void run() {
                 mProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void ToastOnUiThread(String msg){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                T.showShort(mContext,msg);
             }
         });
     }

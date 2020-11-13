@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNFCItemActivity;
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNormalItemActivity;
+import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddPointActivity;
 import com.smart.cloud.fire.activity.Inspection.InspectionMap.InspectionMapActivity;
 import com.smart.cloud.fire.activity.Inspection.ItemsList.ItemsListActivity;
 import com.smart.cloud.fire.activity.Inspection.TaskList.TaskListActivity;
@@ -98,6 +99,10 @@ public class PointListActivity extends MvpActivity<PointListPresenter> implement
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent;
                 switch (item.getItemId()) {
+                    case R.id.add_point:
+                        intent=new Intent(mContext, AddPointActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.add_nfc:
                         if(MyApp.getPrivilege()==11){
                             T.showShort(mContext,"该账号无此权限");

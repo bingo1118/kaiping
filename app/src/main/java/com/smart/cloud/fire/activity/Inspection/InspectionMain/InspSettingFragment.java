@@ -23,6 +23,7 @@ import com.smart.cloud.fire.activity.Camera.CameraDevActivity;
 import com.smart.cloud.fire.activity.Host.HostActivity;
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNFCItemActivity;
 import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddInspectionNormalItemActivity;
+import com.smart.cloud.fire.activity.Inspection.AddInspectionItem.AddPointActivity;
 import com.smart.cloud.fire.activity.Inspection.InspectionMap.InspectionMapActivity;
 import com.smart.cloud.fire.activity.Inspection.NoticeListActivity.NoticeListActivity;
 import com.smart.cloud.fire.activity.Inspection.PointList.PointListActivity;
@@ -108,7 +109,7 @@ public class InspSettingFragment extends Fragment {
 
     @OnClick({R.id.insp_add_normal_ib,R.id.insp_add_nfc_ib
             ,R.id.insp_points_ib,R.id.insp_upload_problem_ib
-            ,R.id.my_image,R.id.insp_notice_ib
+            ,R.id.my_image,R.id.insp_notice_ib,R.id.insp_add_point
             ,R.id.insp_add_fire_ib,R.id.insp_upload_msg_ib,R.id.host_info_ib,R.id.camera_ib})
     public void onClick(View v){
         Intent intent = null;
@@ -128,6 +129,13 @@ public class InspSettingFragment extends Fragment {
                     T.showShort(mContext,"该账号不具备该权限");
                 }else{
                     intent=new Intent(mContext, AddInspectionNFCItemActivity.class);
+                }
+                break;
+            case R.id.insp_add_point:
+                if(MyApp.getPrivilege()==11){
+                    T.showShort(mContext,"该账号不具备该权限");
+                }else{
+                    intent=new Intent(mContext, AddPointActivity.class);
                 }
                 break;
             case R.id.insp_points_ib:

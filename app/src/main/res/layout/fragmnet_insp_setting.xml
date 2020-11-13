@@ -107,6 +107,30 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/insp_add_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:background="@drawable/white_corner_shape">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:text="巡检点添加"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/right"/>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/insp_add_fire_ib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

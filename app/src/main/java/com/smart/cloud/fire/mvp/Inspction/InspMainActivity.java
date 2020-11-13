@@ -52,11 +52,11 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
     @Bind(R.id.navigation)
     BottomNavigationView navigation;
 
-//    TaskListFragment f1;
+    //    TaskListFragment f1;
     ItemsListFragment f1;
     InspMapFragment f2;
     CameraV4Fragment f3;
-//    AssetHomeFragment f3;
+    //    AssetHomeFragment f3;
     AllDevInspFragment f4;
     InspSettingFragment f5;
 
@@ -68,16 +68,21 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insp_main);
         ButterKnife.bind(this);
-        mContext=this;
+        mContext = this;
 
         //不为null，说明是死而复活，移除已经存在的fragment,处理重影问题
         if (savedInstanceState != null) {
             transaction = getFragmentManager().beginTransaction();
-            transaction.remove(getFragmentManager().findFragmentByTag("F1"));
-            transaction.remove(getFragmentManager().findFragmentByTag("F2"));
-            transaction.remove(getFragmentManager().findFragmentByTag("F3"));
-            transaction.remove(getFragmentManager().findFragmentByTag("F4"));
-            transaction.remove(getFragmentManager().findFragmentByTag("f5"));
+            if (getFragmentManager().findFragmentByTag("F1") != null)
+                transaction.remove(getFragmentManager().findFragmentByTag("F1"));
+            if (getFragmentManager().findFragmentByTag("F2") != null)
+                transaction.remove(getFragmentManager().findFragmentByTag("F2"));
+            if (getFragmentManager().findFragmentByTag("F3") != null)
+                transaction.remove(getFragmentManager().findFragmentByTag("F3"));
+            if (getFragmentManager().findFragmentByTag("F4") != null)
+                transaction.remove(getFragmentManager().findFragmentByTag("F4"));
+            if (getFragmentManager().findFragmentByTag("F5") != null)
+                transaction.remove(getFragmentManager().findFragmentByTag("f5"));
             transaction.commitAllowingStateLoss();
         }
 
@@ -96,13 +101,12 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
         return new MainPresenter(this);
     }
 
-    public void init(){
+    public void init() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
 
         navigation.setSelectedItemId(navigation.getMenu().getItem(0).getItemId());
     }
-
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -114,42 +118,42 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
             hideAllFragment(transaction);
             switch (item.getItemId()) {
                 case R.id.insp_main:
-                    if(f1==null){
+                    if (f1 == null) {
                         f1 = new ItemsListFragment();
-                        transaction.add(R.id.framePage,f1,"F1");
-                    }else{
+                        transaction.add(R.id.framePage, f1, "F1");
+                    } else {
                         transaction.show(f1);
                     }
                     break;
                 case R.id.insp_map:
-                    if(f2==null){
+                    if (f2 == null) {
                         f2 = new InspMapFragment();
-                        transaction.add(R.id.framePage,f2,"F2");
-                    }else{
+                        transaction.add(R.id.framePage, f2, "F2");
+                    } else {
                         transaction.show(f2);
                     }
                     break;
                 case R.id.insp_camera:
-                    if(f3==null){
+                    if (f3 == null) {
                         f3 = new CameraV4Fragment();
-                        transaction.add(R.id.framePage,f3,"F3");
-                    }else{
+                        transaction.add(R.id.framePage, f3, "F3");
+                    } else {
                         transaction.show(f3);
                     }
                     break;
                 case R.id.insp_fire:
-                    if(f4==null){
-                        f4 =new AllDevInspFragment();
-                        transaction.add(R.id.framePage,f4,"F4");
-                    }else{
+                    if (f4 == null) {
+                        f4 = new AllDevInspFragment();
+                        transaction.add(R.id.framePage, f4, "F4");
+                    } else {
                         transaction.show(f4);
                     }
                     break;
                 case R.id.insp_notice:
-                    if(f5==null){
-                        f5 =new InspSettingFragment();
-                        transaction.add(R.id.framePage,f5,"F5");
-                    }else{
+                    if (f5 == null) {
+                        f5 = new InspSettingFragment();
+                        transaction.add(R.id.framePage, f5, "F5");
+                    } else {
                         transaction.show(f5);
                     }
                     break;
@@ -160,22 +164,22 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
     };
 
     //隐藏所有Fragment
-    public void hideAllFragment(FragmentTransaction transaction){
-        if(f1!=null){
+    public void hideAllFragment(FragmentTransaction transaction) {
+        if (f1 != null) {
             transaction.hide(f1);
         }
-        if(f2!=null){
+        if (f2 != null) {
             transaction.hide(f2);
             f2.clearState();
         }
-        if(f3!=null){
+        if (f3 != null) {
             transaction.hide(f3);
         }
-        if(f4!=null){
+        if (f4 != null) {
             transaction.hide(f4);
             f4.clearData();
         }
-        if(f5!=null){
+        if (f5 != null) {
             transaction.hide(f5);
         }
 
@@ -226,13 +230,13 @@ public class InspMainActivity extends MvpActivity<MainPresenter> implements Main
      * 个推解绑@@5.16
      */
     private void unbindAlias() {
-        String userCID = SharedPreferencesManager.getInstance().getData(this,SharedPreferencesManager.SP_FILE_GWELL,"CID");//@@
+        String userCID = SharedPreferencesManager.getInstance().getData(this, SharedPreferencesManager.SP_FILE_GWELL, "CID");//@@
         String username = SharedPreferencesManager.getInstance().getData(mContext,
                 SharedPreferencesManager.SP_FILE_GWELL,
                 SharedPreferencesManager.KEY_RECENTNAME);
-        String url= ConstantValues.SERVER_IP_NEW+"loginOut?userId="+username+"&alias="+username+"&cid="+userCID+"&appId=1";//@@5.27添加app编号
+        String url = ConstantValues.SERVER_IP_NEW + "loginOut?userId=" + username + "&alias=" + username + "&cid=" + userCID + "&appId=1";//@@5.27添加app编号
 //        RequestQueue mQueue = Volley.newRequestQueue(this);
-        VolleyHelper helper=VolleyHelper.getInstance(mContext);
+        VolleyHelper helper = VolleyHelper.getInstance(mContext);
         RequestQueue mQueue = helper.getRequestQueue();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {

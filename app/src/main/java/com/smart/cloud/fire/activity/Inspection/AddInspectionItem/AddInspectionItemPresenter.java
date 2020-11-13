@@ -188,6 +188,34 @@ public class AddInspectionItemPresenter extends BasePresenter<AddInspectionItemV
         }));
     }
 
+    public void addPoint(String areaId, String name, String address, String longitude,
+                         String latitude,
+                         String protectionLeve){
+        Observable mObservable = apiStores1.addPoint(areaId,name,address,longitude,latitude,protectionLeve);
+        addSubscription(mObservable,new SubscriberCallBack<>(new ApiCallback<ConfireFireModel>() {
+            @Override
+            public void onSuccess(ConfireFireModel model) {
+                int result = model.getErrorCode();
+                String error=model.getError();//@@6.15
+                if(result==0){
+                    mvpView.addSmokeResult("添加成功",0);
+                }else{
+                    mvpView.addSmokeResult(error,1);//@@6.15
+                }
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                mvpView.addSmokeResult("添加失败",1);
+            }
+
+            @Override
+            public void onCompleted() {
+                mvpView.hideLoading();
+            }
+        }));
+    }
+
 
     public void updateItemInfo(String userID,String smokeName,String smokeMac,String address,String placeTypeId,String memo){
         mvpView.showLoading();

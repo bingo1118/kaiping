@@ -202,7 +202,7 @@ public class GetLocationActivity extends Activity implements View.OnClickListene
         {
 
             // map view 销毁后不在处理新接收的位置
-            if (location == null || mMapView == null)
+            if (location == null || mMapView == null||mBaiduMap==null)
                 return;
             // 构造定位数据
             MyLocationData locData = new MyLocationData.Builder()
