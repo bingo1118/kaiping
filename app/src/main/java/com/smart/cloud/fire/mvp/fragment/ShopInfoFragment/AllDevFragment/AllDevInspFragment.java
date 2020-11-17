@@ -254,9 +254,9 @@ public class AllDevInspFragment extends MvpFragment<AllSmokePresenter> implement
                 if(dev_type0.isChecked()){
                     type="1";
                 }else if(dev_type1.isChecked()){
-                    type="3";
-                }else if(dev_type2.isChecked()){
                     type="4";
+                }else if(dev_type2.isChecked()){
+                    type="3";
                 }
                 if(dev_state0.isChecked()){
                     state="0";
